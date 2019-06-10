@@ -19,6 +19,7 @@ class Data_Ayam extends CI_Controller
     public function index()
     {
         $data['halaman'] = "data_ayam";
+        $data['dataKandang'] = $this->dataAyam->getDataKandang($this->session->userdata('id_periode'));
         $this->load->view('pegawai/body/data_ayam', $data);
     }
 
@@ -42,9 +43,9 @@ class Data_Ayam extends CI_Controller
             'berat_rata' => $berat_rata,
             'jml_pakan' => $jml_pakan,
             'harga' => $harga,
-            'ip' => $ip,
-            'fcr' => $fcr,
-            'mortalitas' => $mortalitas_ayam,
+            'ip' => round($ip, 3),
+            'fcr' => round($fcr, 3),
+            'mortalitas' => round($mortalitas_ayam, 3),
             'id_kelayakan' => 1
         );
 
@@ -61,7 +62,7 @@ class Data_Ayam extends CI_Controller
         $jml_pakan_sum = $this->dataAyam->getSumPakan($this->session->userdata('id_periode'));
         foreach ($jml_pakan_sum->result() as $item) {
             $pakan = $item->jml_pakan;
-            $fcr = ($pakan + $jml_pakan) / $berat_rata;
+            $fcr = (($pakan + $jml_pakan) / $berat_rata)*10;
         }
 
         return $fcr;
@@ -73,7 +74,7 @@ class Data_Ayam extends CI_Controller
         $volume = $this->session->userdata('volume');
         foreach ($jml_mati1->result() as $item1) {
             $mati = $item1->jml_mati + $jml_mati;
-            $mortalitas = (($mati / $volume) * 100) / 100;
+            $mortalitas = (($mati / $volume))*100;
         }
         return $mortalitas;
     }
@@ -84,10 +85,10 @@ class Data_Ayam extends CI_Controller
         $volume = $this->session->userdata('volume');
         foreach ($jml_mati1->result() as $item1) {
             $mati = $item1->jml_mati + $jml_mati;
-            $ayam_hidup = ($volume - $mati) / 100;
+            $ayam_hidup = ($volume - $mati);
         }
 
-        $ip = ((($ayam_hidup * $berat_rata) / ($umur * $fcr))) / 100;
+        $ip = (((($ayam_hidup/$volume) * $berat_rata) / ($umur * $fcr)))*10;
         return $ip;
     }
 }

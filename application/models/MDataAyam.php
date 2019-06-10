@@ -26,4 +26,11 @@ class MDataAyam extends CI_Model{
         return $this->db->affected_rows();
     }
 
+    public function getDataKandang($id_periode){
+        $this->db->select('periode.nomor_periode, data_ayam.*');
+        $this->db->from('data_ayam');
+        $this->db->join('periode', 'periode.id_periode = data_ayam.id_periode');
+        $this->db->where('data_ayam.id_periode', $id_periode);
+        return $this->db->get();
+    }
 }

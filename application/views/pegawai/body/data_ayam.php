@@ -65,6 +65,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php foreach ($dataKandang->result() as $item){?>
+                                        <tr>
+                                            <td><?= $item->nomor_periode; ?></td>
+                                            <td></td>
+                                            <td><?= $item->umur; ?></td>
+                                            <td><?= $item->berat_rata; ?></td>
+                                            <td><?= $item->jml_mati; ?></td>
+                                            <td><?= $item->jml_pakan; ?></td>
+                                            <td><?= $item->harga; ?></td>
+                                        </tr>
+                                    <?php }?>
                                     </tbody>
                                 </table>
                             </div>
