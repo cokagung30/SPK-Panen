@@ -78,7 +78,11 @@
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $no++ ?></td>
-                                                    <td><?php echo $data['nomor_periode']; ?></td>
+                                                    <td>
+                                                        <a href="<?php echo base_url()."pemilik_kandang/Periode/changePage/".$data['id_periode']; ?>">
+                                                            <?php echo $data['nomor_periode']; ?>
+                                                        </a>
+                                                    </td>
                                                     <td><?php echo $data['nama_kandang']; ?></td>
                                                     <td><?php echo $data['volume']; ?></td>
                                                     <td><?php echo $data['keterangan']; ?></td>

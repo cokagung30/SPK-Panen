@@ -7,7 +7,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PeriodeModel extends CI_Model{
+class MPeriode extends CI_Model{
 
     public function getLastNomorPeriode($id_kandang){
         $this->db->select_max('nomor_periode');

@@ -7,7 +7,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pegawais extends CI_Model
+class MPegawai extends CI_Model
 {
     public function tampilPegawai($id_user){
         $this->db->select('pegawai.*, kandang.*');

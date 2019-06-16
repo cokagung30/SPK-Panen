@@ -13,7 +13,8 @@ class Kandang extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Kandangs', 'kandangs');
+        $this->load->model('MKandang', 'kandangs');
+        $this->load->model('MPpl', 'ppl');
     }
 
     public function index()
@@ -21,6 +22,7 @@ class Kandang extends CI_Controller
         if ($this->session->userdata('kondisi') == 'Berhasil Login') {
             $data['halaman'] = "kandang";
             $data['sql1'] = $this->kandangs->tampilKandang($this->session->userdata('id_user'));
+            $data['ppl']=$this->ppl->tampilPpl();
             $this->load->view('pemilik_kandang/body/kandang', $data);
         } else {
             redirect(base_url() . 'pemilik_kandang/Login/index');
@@ -32,6 +34,7 @@ class Kandang extends CI_Controller
         $data = array(
             'id_pemilik_kandang' => $this->session->userdata('id_user'),
             'nama_kandang' => $this->input->post('namaKandang'),
+            'id_ppl'=>$this->input->post('nama_ppl'),
             'lokasi' => $this->input->post('alamatKandang'),
             'volume' => $this->input->post('volumeKandang')
         );
@@ -55,6 +58,7 @@ class Kandang extends CI_Controller
 
         $data = array(
             'nama_kandang' => $this->input->post('namaKandang'),
+            'id_ppl' => $this->input->post('nama_ppl'),
             'lokasi' => $this->input->post('alamatKandang'),
             'volume' => $this->input->post('volumeKandang')
         );

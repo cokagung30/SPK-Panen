@@ -68,18 +68,18 @@
         Addons
     </div>
     <!-- Nav Item - Pages Data Ayam Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+    <li class="nav-item <?php if ($halaman == 'data_ayam') { echo 'active'; } else{ echo '';} ?>">
+        <a class="nav-link" href="<?= base_url(); ?>pemilik_kandang/Data_ayam/index">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Data Ayam</span>
-        </a>
+            <span>Data Ayam</span></a>
     </li>
     <!-- Nav Item - Pages Data Pengajuan Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+    <li class="nav-item <?php if ($halaman == 'pengajuan') { echo 'active'; } else{ echo '';} ?>">
+        <a class="nav-link" href="<?= base_url(); ?>pemilik_kandang/Pengajuan/index">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Pengajuan</span>
-        </a>
+            <span>Pengajuan</span></a>
+    </li>
     </li>
 
     <!-- Nav Item - Charts -->
