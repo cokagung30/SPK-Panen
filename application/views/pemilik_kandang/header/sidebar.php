@@ -69,10 +69,9 @@
     </div>
     <!-- Nav Item - Pages Data Ayam Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link" href="<?= base_url(); ?>pemilik_kandang/DataAyam/index">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Data Ayam</span>
-        </a>
+            <span>Data Ayam</span></a>
     </li>
     <!-- Nav Item - Pages Data Pengajuan Menu -->
     <li class="nav-item">

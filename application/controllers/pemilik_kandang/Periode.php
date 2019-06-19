@@ -90,4 +90,5 @@ class Periode extends CI_Controller
             redirect(base_url() . "pemilik_kandang/Periode/index");
         }
     }
+
 }

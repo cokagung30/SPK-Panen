@@ -45,7 +45,7 @@ class Data_Ayam extends CI_Controller
             'harga' => $harga,
             'ip' => round($ip, 3),
             'fcr' => round($fcr, 3),
-            'mortalitas' => round($mortalitas_ayam, 3),
+            'mortalitas' => $mortalitas_ayam,
             'id_kelayakan' => 1
         );
 
