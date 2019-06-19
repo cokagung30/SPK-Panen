@@ -61,6 +61,7 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Nama Kandang</th>
+                                            <th>Nama PPL</th>
                                             <th>Lokasi Kandang</th>
                                             <th>Volume Kandang</th>
                                             <th class="text-center">
@@ -76,6 +77,7 @@
                                             <tr>
                                                 <td><a href="<?= base_url(); ?>"><?php echo $no++; ?></a></td>
                                                 <td><?php echo $data->nama_kandang; ?></td>
+                                                <td><?php echo $data->nama_ppl; ?></td>
                                                 <td><?php echo $data->lokasi; ?></td>
                                                 <td class="text-right"><?php echo $data->volume; ?></td>
                                                 <td>
@@ -137,6 +139,13 @@
                         <input type="text" class="form-control" placeholder="Nama Kandang" name="namaKandang">
                     </div>
                     <div class="form-group">
+                        <select class="form-control" name="nama_ppl" id="nama_ppl">
+                            <?php foreach ($ppl->result() as $data) { ?>
+                                <option value="<?php echo $data->id_ppl; ?>"><?php echo $data->nama_ppl; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <input type="text" class="form-control" placeholder="Alamat Kandang" name="alamatKandang">
                     </div>
                     <div class="form-group">
@@ -157,6 +166,7 @@
     foreach ($sql1->result() as $data):
         $id_kandang = $data->id_kandang;
         $nama_kandang = $data->nama_kandang;
+        $id_ppl = $data->id_ppl;
         $alamat = $data->lokasi;
         $volume = $data->volume;
 
@@ -176,6 +186,15 @@
                     <div class="form-group">
                         <input type="text" class="form-control" value="<?= $id_kandang; ?>" name="id_kandang" hidden>
                         <input type="text" class="form-control" value="<?= $nama_kandang; ?>" name="namaKandang">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="nama_ppl">
+                            <?php foreach ($ppl->result() as $item) { ?>
+                                <option value="<?php echo $item->id_ppl; ?>" <?= ($id_ppl == $item->id_ppl)? "selected" : ""; ?>>
+                                    <?php echo $item->nama_ppl; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <textarea class="form-control" name="alamatKandang"><?= $alamat; ?></textarea>

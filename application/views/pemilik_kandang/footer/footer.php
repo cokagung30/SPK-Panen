@@ -180,4 +180,43 @@
             }
         });
     });
+
+    $(document).on("click", "#uploadData", function () {
+        var id_pemilik_kandang = $(this).data('pemilik');
+        const id_data_ayam = $(this).data('ayam');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Apakah anda ingin mengupload data ini?",
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: "Batal",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Upload'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'POST',
+                    url: "<?= base_url();?>pemilik_kandang/Pengajuan/kirimPengajuan",
+                    data: {'id_pemilik_kandang': id_pemilik_kandang, 'id_data_ayam': id_data_ayam},
+                    success: function () {
+                        Swal.fire('Uploaded!',
+                            'Your file has been uploaded.',
+                            'success').then((willDelete) => {
+                            if (willDelete) {
+                                window.location.href = '<?= base_url(); ?>pemilik_kandang/Pengajuan/index';
+                            }
+                        });
+                    }
+                });
+            } else {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
+            }
+        });
+    });
 </script>

@@ -7,7 +7,7 @@
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Kandangs extends CI_Model{
+class MKandang extends CI_Model{
 
     public function tambahKandang($data){
         $this->db->insert('kandang', $data);
@@ -15,7 +15,11 @@ class Kandangs extends CI_Model{
     }
 
     public function tampilKandang($id_user){
-        return $this->db->get_where('kandang', array('id_pemilik_kandang' => $id_user));
+        $this->db->select('kandang.*, ppl.*');
+        $this->db->from('kandang');
+        $this->db->join('ppl', 'kandang.id_ppl = ppl.id_ppl');
+        $this->db->where('kandang.id_pemilik_kandang', $id_user);
+        return $this->db->get();
     }
 
     public function tampilVolumeKandang($id_kandang){

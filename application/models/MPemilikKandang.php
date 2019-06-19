@@ -7,7 +7,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PemilikKandang extends CI_Model{
+class MPemilikKandang extends CI_Model{
 
     public function tambahPemilik($data){
         $this->db->insert('pemilik_kandang', $data);

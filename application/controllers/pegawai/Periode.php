@@ -13,8 +13,8 @@ class Periode extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('PeriodeModel', 'periode');
-        $this->load->model('Kandangs', 'kandang');
+        $this->load->model('MPeriode', 'periode');
+        $this->load->model('MKandang', 'kandang');
     }
 
     public function index()
