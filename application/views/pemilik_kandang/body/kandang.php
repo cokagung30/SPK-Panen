@@ -33,17 +33,7 @@
                 <div class="row">
 
                     <!-- Grow In Utility -->
-                    <div class="col-md-4">
-                        <form>
-                            <div class="form-group">
-                                <a style="color: #ffffff;" class="btn btn-primary btn-user btn-block"
-                                   data-toggle="modal" data-target="#tambahKandang">
-                                    Tambah Kandang
-                                </a>
-                            </div>
-                        </form>
 
-                    </div>
 
                 </div>
                 <div class="flash-data" data-flashdata="<?php echo $this->session->flashdata('pesan'); ?>"></div>
@@ -58,6 +48,17 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
+                                        <div class="col-md-4">
+                                            <form>
+                                                <div class="form-group">
+                                                    <a style="color: #ffffff;" class="btn btn-sm btn-primary"
+                                                       data-toggle="modal" data-target="#tambahKandang">
+                                                       Tambah Kandang
+                                                    </a>
+                                                </div>
+                                            </form>
+
+                                        </div>
                                         <tr>
                                             <th>No.</th>
                                             <th>Nama Kandang</th>
