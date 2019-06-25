@@ -85,8 +85,7 @@
                                         </td>
                                         <td>
                                             <center>
-                                                <a class="btn btn-danger" data-toggle="modal"
-                                                   data-target="#hapusDataAyam"
+                                                <a class="btn btn-danger hapusDataAyam" data-toggle="modal"
                                                    style="color: white"><i style="color: white;" class="fa fa-trash">
                                                     </i> Delete</a>
                                             </center>
@@ -189,6 +188,9 @@
     $jml_pakan = $data->jml_pakan;
     $tanggal = $data->tanggal;
     $harga = $data->harga;
+    $mortalitas = $data->mortalitas;
+    $ip = $data->ip;
+    $fcr = $data->fcr;
     ?>
     <div class="modal fade" id="editDataAyam<?= $id_data_ayam ?>" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel"
@@ -201,10 +203,15 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form method="post" action="<?php echo base_url(); ?>pegawai/Data_ayam/updateDataAyam">
+                <form method="post" action="<?php echo base_url(); ?>pegawai/DataAyam/updateDataAyam/<?= $id_data_ayam; ?>">
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" value="<?= $id_data_ayam; ?>" name="id_data_ayam" hidden>
+                            <input type="text" value="<?= $jml_mati; ?>" name="jm_mati_sebelumnya" hidden>
+                            <input type="text" value="<?= $berat_rata; ?>" name="berat_rata_sebelumnya" hidden>
+                            <input type="text" value="<?= $jml_pakan; ?>" name="jml_pakan_sebelumnya" hidden>
+                            <input type="text" value="<?= $mortalitas; ?>" name="mortalitas" >
+                            <input type="text" value="<?= $fcr; ?>" name="fcr" hidden>
+                            <input type="text" value="<?= $ip; ?>" name="ip" hidden>
                             <input type="text" class="form-control" placeholder="Nama Periode" name="namaPeriode"
                                    value="<?= $this->session->userdata('keterangan'); ?>" disabled>
                         </div>

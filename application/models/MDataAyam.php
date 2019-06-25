@@ -49,13 +49,6 @@ class MDataAyam extends CI_Model
         return $this->db->get();
     }
 
-    public function updateDataAyam($id_data_ayam, $data)
-    {
-        $this->db->where('id_data_ayam', $id_data_ayam);
-        $this->db->update('data_ayam', $data);
-        return $this->db->affected_rows();
-    }
-
     public function getMatiTerakhir($id_periode, $id_data_ayam)
     {
         $this->db->where('id_data_kandang', $id_data_ayam);
@@ -76,4 +69,17 @@ class MDataAyam extends CI_Model
         $this->db->select_max('harga');
         return $this->db->get_where('data_ayam', array('id_periode' => $id_periode));
     }
+
+    public function deleteDataAyamById($id_data_ayam)
+    {
+//        $this->db->where()
+    }
+
+    public function updateDataAyam($id_data_ayam, $id_periode, $data){
+        $where = "id_periode = '$id_periode' AND id_data_ayam >= $id_data_ayam";
+        $this->db->where($where);
+        $this->db->update('data_ayam', $data);
+        return $this->db->affected_rows();
+    }
+
 }
