@@ -11,5 +11,8 @@ class MPpl extends CI_Model{
     public function tampilPpl(){
         return $this->db->get('ppl');
     }
+    public function loginPpl($username, $password){
+        return $this->db->get_where('ppl', array('username' => $username, 'password'=> $password));
+    }
 
 }

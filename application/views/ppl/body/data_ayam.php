@@ -31,6 +31,8 @@
 
                 <!-- Content Row -->
 
+
+
                 <!-- DataTales Example -->
                 <div class="card shadow mb-6">
                     <div class="card-header py-3">
@@ -88,31 +90,14 @@
                                             <center>
                                                 <a class="btn btn-danger" data-toggle="modal"
                                                    data-target="#hapusDataAyam"
-                                                   style="color: white"><i style="color: white;" class="fa fa-trash">
-                                                    </i> Delete</a>
+                                                   style="color: white"><i style="color: white;"
+                                                                           class="fa fa-trash"></i>
+                                                    Delete</a>
                                             </center>
                                         </td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td colspan="4" class="text-center">
-                                        Total
-                                    </td>
-                                    <?php foreach ($jumlah->result() as $item): ?>
-                                        <td><?= $item->jml_mati; ?></td>
-                                        <td><?= $item->jml_pakan; ?></td>
-                                        <td><?= $item->harga; ?></td>
-                                    <?php endforeach; ?>
-                                    <td colspan="2" class="text-center">
-                                        <a href="<?= base_url(); ?>pegawai/Data_ayam/deleteAll/<?= $this->session->userdata('id_periode'); ?>"
-                                           class="btn btn-danger" data-toggle="modal"
-                                           style="color: white"><i style="color: white;" class="fa fa-trash">
-                                            </i> Clear All</a>
-                                    </td>
-                                </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -191,56 +176,48 @@
     $tanggal = $data->tanggal;
     $harga = $data->harga;
     ?>
-    <div class="modal fade" id="editDataAyam<?= $id_data_ayam ?>" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Data Harian Ayam</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <form method="post" action="<?php echo base_url(); ?>pegawai/Data_ayam/updateDataAyam">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="text" value="<?= $id_data_ayam; ?>" name="id_data_ayam" hidden>
-                            <input type="text" class="form-control" placeholder="Nama Periode" name="namaPeriode"
-                                   value="<?= $this->session->userdata('keterangan'); ?>" disabled>
-                        </div>
-                        <div class="form-group">
-                            <input type="date" class="form-control" placeholder="Tanggal" name="tanggal"
-                                   value="<?= $tanggal; ?>">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Umur" name="umur"
-                                   value="<?= $umur; ?>">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Berat rata-rata" name="beratrata"
-                                   value="<?= $berat_rata; ?>">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Jumlah Ayam Mati" name="jumlahmati"
-                                   value="<?= $jml_mati; ?>">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Jumlah Pakan Habis" name="jumlahpakan"
-                                   value="<?= $jml_pakan ?>">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Harga Jual" name="hargajual"
-                                   value="<?= $harga; ?>">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-secondary">Update</button>
-                    </div>
-                </form>
+<div class="modal fade" id="editDataAyam<?= $id_data_ayam ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Data Harian Ayam</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
+            <form method="post" action="<?php echo base_url(); ?>pegawai/Data_ayam/updateDataAyam">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Nama Periode" name="namaPeriode"
+                               value="<?= $this->session->userdata('keterangan'); ?>" disabled>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control" placeholder="Tanggal" name="tanggal" value="<?= $tanggal; ?>">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Umur" name="umur" value="<?= $umur; ?>">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Berat rata-rata" name="beratrata" value="<?= $berat_rata; ?>">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Jumlah Ayam Mati" name="jumlahmati" value="<?= $jml_mati; ?>">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Jumlah Pakan Habis" name="jumlahpakan" value="<?= $jml_pakan ?>">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Harga Jual" name="hargajual" value="<?= $harga; ?>">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary">Tambah</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 <?php endforeach; ?>
 <?php $this->load->view('pegawai/footer/footer') ?>
 </body>

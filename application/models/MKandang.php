@@ -15,13 +15,19 @@ class MKandang extends CI_Model{
     }
 
     public function tampilKandang($id_user){
-        $this->db->select('kandang.*, ppl.*');
+    $this->db->select('kandang.*, ppl.*');
+    $this->db->from('kandang');
+    $this->db->join('ppl', 'kandang.id_ppl = ppl.id_ppl');
+    $this->db->where('kandang.id_pemilik_kandang', $id_user);
+    return $this->db->get();
+}
+    public function tampilPemilik($id_user){
+        $this->db->select('kandang.*, pemilik_kandang.*');
         $this->db->from('kandang');
-        $this->db->join('ppl', 'kandang.id_ppl = ppl.id_ppl');
+        $this->db->join('pemilik_kandang', 'kandang.id_pemilik_kandang = pemilik_kandang.id_pemilik_kandang');
         $this->db->where('kandang.id_pemilik_kandang', $id_user);
         return $this->db->get();
     }
-
     public function tampilVolumeKandang($id_kandang){
         return $this->db->get_where('kandang', array('id_kandang' => $id_kandang));
     }
@@ -34,5 +40,13 @@ class MKandang extends CI_Model{
         $this->db->where('id_kandang', $id_kandang);
         $this->db->update('kandang', $data);
         return $this->db->affected_rows();
+    }
+
+    public function getAllKandangByPpl($id_pll){
+        $this->db->select('kandang.*, pemilik_kandang.*');
+        $this->db->from('kandang');
+        $this->db->join('pemilik_kandang', 'kandang.id_pemilik_kandang = pemilik_kandang.id_pemilik_kandang');
+        $this->db->where('kandang.id_ppl',$id_pll);
+        return $this->db->get();
     }
 }

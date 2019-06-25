@@ -33,17 +33,7 @@
                 <div class="row">
 
                     <!-- Grow In Utility -->
-                    <div class="col-md-4">
-                        <form>
-                            <div class="form-group">
-                                <a style="color: #ffffff;" class="btn btn-primary btn-user btn-block"
-                                   data-toggle="modal" data-target="#tambahPeriode">
-                                    Tambah Periode
-                                </a>
-                            </div>
-                        </form>
 
-                    </div>
 
                 </div>
 
@@ -59,6 +49,17 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
+                                        <div class="col-md-4">
+                                            <form>
+                                                <div class="form-group">
+                                                    <a style="color: #ffffff;" class="btn btn-primary btn-sm"
+                                                       data-toggle="modal" data-target="#tambahPeriode">
+                                                        Tambah Periode
+                                                    </a>
+                                                </div>
+                                            </form>
+
+                                        </div>
                                         <tr>
                                             <th>No.</th>
                                             <th>Nomor Periode</th>

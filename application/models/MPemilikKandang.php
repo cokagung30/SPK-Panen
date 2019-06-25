@@ -17,4 +17,9 @@ class MPemilikKandang extends CI_Model{
     public function loginPemilik($username, $password){
         return $this->db->get_where('pemilik_kandang', array('username' => $username, 'password'=> $password));
     }
+
+    public function getAllKandangByPpl($id_pll){
+        $this->db->where('id_ppl',$id_pll);
+        return $this->db->get('kandang');
+    }
 }
