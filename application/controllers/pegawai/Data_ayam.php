@@ -20,6 +20,7 @@ class Data_Ayam extends CI_Controller
     {
         $data['halaman'] = "data_ayam";
         $data['dataKandang'] = $this->dataAyam->getDataKandang($this->session->userdata('id_periode'));
+        $data['jumlah'] = $this->dataAyam->getTotal($this->session->userdata('id_periode'));
         $this->load->view('pegawai/body/data_ayam', $data);
     }
 
@@ -32,11 +33,9 @@ class Data_Ayam extends CI_Controller
         $berat_rata = $this->input->post('beratrata');
         $jml_pakan = $this->input->post('jumlahpakan');
         $harga = $this->input->post('hargajual');
-        $totalJmlPakan = $this->jumlahPakan($jml_pakan);
-        $totalJmlMati = $this->jumlahMati($jml_mati);
-        $fcr = $this->jumlahFcr($jml_pakan, $berat_rata);
-        $mortalitas_ayam = $this->mortalitas($jml_mati);
-        $ip = $this->hasilIp($jml_mati, $berat_rata, $umur, $fcr);
+        $fcr = $this->jumlahFcr($id_periode, $jml_pakan, $berat_rata);
+        $mortalitas_ayam = $this->mortalitas($id_periode, $jml_mati);
+        $ip = $this->hasilIp($id_periode, $jml_mati, $berat_rata, $umur, $fcr);
 
 
         $data = array(
@@ -47,8 +46,6 @@ class Data_Ayam extends CI_Controller
             'berat_rata' => $berat_rata,
             'jml_pakan' => $jml_pakan,
             'harga' => $harga,
-            'total_mati' => $totalJmlMati,
-            'total_pakan' => $totalJmlPakan,
             'ip' => round($ip, 3),
             'fcr' => round($fcr, 3),
             'mortalitas' => round($mortalitas_ayam, 3),
@@ -63,9 +60,57 @@ class Data_Ayam extends CI_Controller
 
     }
 
-    public function jumlahFcr($jml_pakan, $berat_rata)
+    public function updateDataAyam()
     {
-        $jml_pakan_sum = $this->dataAyam->getSumPakan($this->session->userdata('id_periode'));
+        $id_periode = $this->session->userdata('id_periode');
+        $id_data_ayam = $this->input->post('id_data_ayam');
+        $tanggal = $this->input->post('tanggal');
+        $berat_rata = $this->input->post('beratrata');
+        $umur = $this->input->post('umur');
+        $jml_mati = $this->input->post('jumlahmati');
+        $jml_pakan = $this->input->post('jumlahpakan');
+        $harga = $this->input->post('hargajual');
+        $fcr = $this->jumlahFcr($id_periode, $jml_pakan, $berat_rata);
+        $mortalitas_ayam = $this->mortalitas($id_periode, $jml_mati);
+        $ip = $this->hasilIp($id_periode, $jml_mati, $berat_rata, $umur, $fcr);
+
+        $data = array(
+            'umur' => $umur,
+            'tanggal' => $tanggal,
+            'jml_mati' => $jml_mati,
+            'berat_rata' => $berat_rata,
+            'jml_pakan' => $jml_pakan,
+            'harga' => $harga,
+            'ip' => round($ip, 3),
+            'fcr' => round($fcr, 3),
+            'mortalitas' => round($mortalitas_ayam, 3),
+            'id_kelayakan' => 1
+        );
+
+        $updateAyam = $this->dataAyam->updateDataAyam($id_data_ayam, $data);
+        if ($updateAyam > 0){
+            $this->session->set_flashdata('pesan', 'berhasil');
+            redirect(base_url() . "pegawai/Data_ayam/index");
+        } else {
+            $this->session->set_flashdata('pesan', 'gagal');
+            redirect(base_url() . "pegawai/Data_ayam/index");
+        }
+    }
+
+    public function deleteAll($id_periode){
+        $delete = $this->dataAyam->deleteAllData($id_periode);
+        if ($delete > 0){
+            $this->session->set_flashdata('pesan', 'berhasil');
+            redirect(base_url() . "pegawai/Data_ayam/index");
+        } else {
+            $this->session->set_flashdata('pesan', 'gagal');
+            redirect(base_url() . "pegawai/Data_ayam/index");
+        }
+    }
+
+    public function jumlahFcr($id_periode, $jml_pakan, $berat_rata)
+    {
+        $jml_pakan_sum = $this->dataAyam->getSumPakan($id_periode);
         foreach ($jml_pakan_sum->result() as $item) {
             $pakan = $item->jml_pakan;
             $fcr = (($pakan + $jml_pakan) / $berat_rata) * 10;
@@ -74,9 +119,9 @@ class Data_Ayam extends CI_Controller
         return $fcr;
     }
 
-    public function jumlahPakan($jml_pakan)
+    public function jumlahPakan($id_periode, $jml_pakan)
     {
-        $jml_pakan_sum = $this->dataAyam->getSumPakan($this->session->userdata('id_periode'));
+        $jml_pakan_sum = $this->dataAyam->getSumPakan($id_periode);
         foreach ($jml_pakan_sum->result() as $item) {
             $pakan = $item->jml_pakan;
             $jumlah_pakan = $pakan + $jml_pakan;
@@ -84,9 +129,9 @@ class Data_Ayam extends CI_Controller
         return $jumlah_pakan;
     }
 
-    public function mortalitas($jml_mati)
+    public function mortalitas($id_periode, $jml_mati)
     {
-        $jml_mati1 = $this->dataAyam->getJumlahMati($this->session->userdata('id_periode'));
+        $jml_mati1 = $this->dataAyam->getJumlahMati($id_periode);
         $volume = $this->session->userdata('volume');
         foreach ($jml_mati1->result() as $item1) {
             $mati = $item1->jml_mati + $jml_mati;
@@ -105,9 +150,9 @@ class Data_Ayam extends CI_Controller
         return $mati;
     }
 
-    public function hasilIp($jml_mati, $berat_rata, $umur, $fcr)
+    public function hasilIp($id_periode, $jml_mati, $berat_rata, $umur, $fcr)
     {
-        $jml_mati1 = $this->dataAyam->getJumlahMati($this->session->userdata('id_periode'));
+        $jml_mati1 = $this->dataAyam->getJumlahMati($id_periode);
         $volume = $this->session->userdata('volume');
         foreach ($jml_mati1->result() as $item1) {
             $mati = $item1->jml_mati + $jml_mati;
@@ -118,11 +163,4 @@ class Data_Ayam extends CI_Controller
         return $ip;
     }
 
-    public function updateDataAyam()
-    {
-        $id_periode = $this->input->post('id_periode');
-        $id_data_ayam = $this->input->post('id_data_ayam');
-        $umur = $this->input->post('umur');
-
-    }
 }
