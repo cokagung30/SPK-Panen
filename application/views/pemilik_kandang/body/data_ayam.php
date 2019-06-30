@@ -34,7 +34,17 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-6">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Data Ayam</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Data Ayam
+                            <?php
+                            foreach ($jumlahData->result() as $item) {
+                                ?>
+                                <a class="btn btn-info" style="color: white; margin-left: 20px;"
+                                   <?= ($item->umur < 10) ? 'hidden' : '' ?> href="<?= base_url() ?>pemilik_kandang/Data_ayam/nilaiNormalisasi/<?= $this->session->userdata('id_periode_kandang'); ?>">
+                                    <i class="fa fa-brain"></i>  Keputusan</a>
+                            <?php }
+                            ?>
+                        </h6>
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -48,33 +58,31 @@
                                     <th>Mortalitas</th>
                                     <th>Harga Jual</th>
                                     <th>IP</th>
-                                    <th>Status</th>
                                     <th>Action</th
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($dataKandang->result() as $item){?>
+                                <?php foreach ($dataKandang->result() as $item) { ?>
                                     <tr>
                                         <td><?= $item->keterangan; ?></td>
                                         <td><?= $item->umur; ?></td>
                                         <td><?= $item->tanggal; ?></td>
-                                        <td><?= $item->fcr; ?></td>
+                                        <td><?= round($item->fcr, 2); ?></td>
                                         <td><?= $item->mortalitas; ?></td>
                                         <td><?= $item->harga; ?></td>
                                         <td><?= $item->ip; ?></td>
-                                        <td><?= $item->status; ?></td>
-                                       <td>
-                                           <a id="uploadData"
-                                              class="btn btn-primary"
-                                              data-kandang="<?= $item->id_kandang; ?>"
-                                              data-pemilik="<?= $this->session->userdata('id_user'); ?>"
-                                              data-ayam="<?= $item->id_data_ayam; ?>"
-                                              style="color: white">
-                                               <i style="color: white;" class="fa fa-upload"></i> Send
-                                           </a>
-                                       </td>
+                                        <td>
+                                            <a id="uploadData"
+                                               class="btn btn-primary"
+                                               data-kandang="<?= $item->id_kandang; ?>"
+                                               data-pemilik="<?= $this->session->userdata('id_user'); ?>"
+                                               data-ayam="<?= $item->id_data_ayam; ?>"
+                                               style="color: white">
+                                                <i style="color: white;" class="fa fa-upload"></i> Send
+                                            </a>
+                                        </td>
                                     </tr>
-                                <?php }?>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -115,7 +123,8 @@
             <form method="post" action="<?php echo base_url(); ?>pegawai/Data_ayam/insertDataAyam">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nama Periode" name="namaPeriode" value="<?= $this->session->userdata('keterangan'); ?>" disabled>
+                        <input type="text" class="form-control" placeholder="Nama Periode" name="namaPeriode"
+                               value="<?= $this->session->userdata('keterangan'); ?>" disabled>
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" placeholder="Tanggal" name="tanggal">
