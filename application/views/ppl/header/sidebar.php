@@ -41,6 +41,11 @@
             <i class="fas fa-fw fa-home"></i>
             <span>Kandang</span></a>
     </li>
+    <li class="nav-item <?php if ($halaman == 'kelayakan') { echo 'active'; } else{ echo '';} ?>">
+        <a class="nav-link" href="<?= base_url(); ?>ppl/Kelayakan/index">
+            <i class="fas fa-fw fa-home"></i>
+            <span>Kelayakan</span></a>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 

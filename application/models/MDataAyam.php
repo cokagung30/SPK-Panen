@@ -70,16 +70,46 @@ class MDataAyam extends CI_Model
         return $this->db->get_where('data_ayam', array('id_periode' => $id_periode));
     }
 
-    public function deleteDataAyamById($id_data_ayam)
+    public function updateDataAyam($id_data_ayam, $id_periode, $data)
     {
-//        $this->db->where()
-    }
-
-    public function updateDataAyam($id_data_ayam, $id_periode, $data){
-        $where = "id_periode = '$id_periode' AND id_data_ayam >= $id_data_ayam";
-        $this->db->where($where);
+        $this->db->where('id_data_ayam', $id_data_ayam, 'id_periode', $id_periode);
         $this->db->update('data_ayam', $data);
         return $this->db->affected_rows();
     }
 
+    public function updateDataMengurangi($selisihFcr, $selisihMortalitas, $id_data_ayam)
+    {
+        $update = $this->db->query("Update data_ayam Set mortalitas = mortalitas + '$selisihMortalitas', fcr = fcr + '$selisihFcr' where id_data_ayam >= $id_data_ayam");
+        return $update;
+    }
+
+    public function getJmlMaxJmlPakan($id_data_ayam, $id_periode)
+    {
+        $where = "id_data_ayam <= " . $id_data_ayam . " AND id_periode = " . $id_periode . "";
+        $this->db->where($where);
+        $this->db->select_sum('jml_pakan');
+        $this->db->select_sum('jml_mati');
+        return $this->db->get('data_ayam');
+    }
+
+    public function hitungJumlahHari($idPeriode)
+    {
+        $this->db->select_max('ip');
+        return $this->db->get_where('data_ayam', array('id_periode' => $idPeriode));
+    }
+
+    public function getPerhitungan($idPeriode)
+    {
+        $this->db->select_max('ip');
+        $this->db->select_max('mortalitas');
+        $this->db->select_min('fcr');
+        $this->db->select_max('harga');
+        return $this->db->get_where('data_ayam', array('id_periode' => $idPeriode));
+    }
+
+    public function getLastData($idPeriode){
+        $this->db->order_by('umur', 'DESC');
+        $this->db->limit(1);
+        return $this->db->get_where('data_ayam', array('id_periode' => $idPeriode));
+    }
 }

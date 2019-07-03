@@ -209,7 +209,7 @@
                             <input type="text" value="<?= $jml_mati; ?>" name="jm_mati_sebelumnya" hidden>
                             <input type="text" value="<?= $berat_rata; ?>" name="berat_rata_sebelumnya" hidden>
                             <input type="text" value="<?= $jml_pakan; ?>" name="jml_pakan_sebelumnya" hidden>
-                            <input type="text" value="<?= $mortalitas; ?>" name="mortalitas" >
+                            <input type="text" value="<?= $mortalitas; ?>" name="mortalitas" hidden>
                             <input type="text" value="<?= $fcr; ?>" name="fcr" hidden>
                             <input type="text" value="<?= $ip; ?>" name="ip" hidden>
                             <input type="text" class="form-control" placeholder="Nama Periode" name="namaPeriode"
@@ -217,11 +217,11 @@
                         </div>
                         <div class="form-group">
                             <input type="date" class="form-control" placeholder="Tanggal" name="tanggal"
-                                   value="<?= $tanggal; ?>">
+                                   value="<?= $tanggal; ?>" hidden>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Umur" name="umur"
-                                   value="<?= $umur; ?>">
+                                   value="<?= $umur; ?>" hidden>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Berat rata-rata" name="beratrata"

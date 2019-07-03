@@ -40,6 +40,8 @@ class Login extends CI_Controller
                 $session_data = array(
                     'id_pegawai' => $data->id_pegawai,
                     'nama_pegawai' => $data->nama_pegawai,
+                    'no_telp_pegawai' => $data->no_telp,
+                    'username_pegawai' => $data->username,
                     'id_kandang' => $data->id_kandang,
                     'level_pegawai' => "2",
                     'kondisi_pegawai' => $status
@@ -57,7 +59,7 @@ class Login extends CI_Controller
     public function logout()
     {
         $data = array(
-          'id_pegawai', 'nama_pegawai', 'id_kandang', 'level_pegawai', 'kondisi_pegawai'
+          'id_pegawai', 'nama_pegawai', 'id_kandang', 'username','level_pegawai', 'kondisi_pegawai'
         );
         $this->session->unset_userdata($data);
         redirect(base_url() . 'pegawai/login/index');

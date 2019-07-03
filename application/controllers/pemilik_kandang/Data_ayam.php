@@ -14,12 +14,17 @@ class Data_Ayam extends CI_Controller
     {
         parent::__construct();
         $this->load->model('MDataAyam', 'dataAyam');
+        $this->load->model('MKeputusan', 'keputusan');
+        $this->load->model('MKelayakan', 'kelayakan');
     }
 
     public function index()
     {
         $data['halaman'] = "data_ayam";
         $data['dataKandang'] = $this->dataAyam->getDataAyam($this->session->userdata('id_periode_kandang'));
+        $data['jumlahData'] = $this->dataAyam->hitungJumlahHari($this->session->userdata('id_periode_kandang'));
+        $data['dataKeputusan'] = $this->keputusan->selectDataKeputusan($this->session->userdata('id_periode_kandang'));
+        $data['keputusan'] = $this->keputusan->selectDataKeputusan($this->session->userdata('id_periode_kandang'));
         $this->load->view('pemilik_kandang/body/data_ayam', $data);
     }
 
@@ -50,7 +55,7 @@ class Data_Ayam extends CI_Controller
         );
 
         $insertDataAyam = $this->dataAyam->insertDataAyam($data);
-        if ($insertDataAyam > 0){
+        if ($insertDataAyam > 0) {
             $this->session->set_flashdata('pesan', 'berhasil');
             redirect(base_url() . "pemilik_kandang/Data_ayam/index");
         }
@@ -62,7 +67,7 @@ class Data_Ayam extends CI_Controller
         $jml_pakan_sum = $this->dataAyam->getSumPakan($this->session->userdata('id_periode'));
         foreach ($jml_pakan_sum->result() as $item) {
             $pakan = $item->jml_pakan;
-            $fcr = (($pakan + $jml_pakan) / $berat_rata)*10;
+            $fcr = (($pakan + $jml_pakan) / $berat_rata) * 10;
         }
 
         return $fcr;
@@ -74,7 +79,7 @@ class Data_Ayam extends CI_Controller
         $volume = $this->session->userdata('volume');
         foreach ($jml_mati1->result() as $item1) {
             $mati = $item1->jml_mati + $jml_mati;
-            $mortalitas = (($mati / $volume))*100;
+            $mortalitas = (($mati / $volume)) * 100;
         }
         return $mortalitas;
     }
@@ -88,7 +93,89 @@ class Data_Ayam extends CI_Controller
             $ayam_hidup = ($volume - $mati);
         }
 
-        $ip = (((($ayam_hidup/$volume) * $berat_rata) / ($umur * $fcr)))*10;
+        $ip = (((($ayam_hidup / $volume) * $berat_rata) / ($umur * $fcr))) * 10;
         return $ip;
+    }
+
+    /**
+     * @param $id_periode
+     */
+    public function nilaiNormalisasi($id_periode)
+    {
+        $perhitungan = $this->dataAyam->getPerhitungan($id_periode);
+        $data = $this->dataAyam->getLastData($id_periode);
+        foreach ($data->result() as $item) {
+            $fcrvalue = $item->fcr;
+            $ipValue = $item->ip;
+            $mortalitasValue = $item->mortalitas;
+            $hargaValue = $item->harga;
+        }
+
+        foreach ($perhitungan->result() as $value) {
+            $fcrEnd = $value->fcr;
+            $ipEnd = $item->ip;
+            $mortalitasEnd = $item->mortalitas;
+            $hargaEnd = $item->harga;
+        }
+
+        $normalisasiIP = $this->normalisasiIP($ipEnd, $ipValue);
+        $normalisasiFCR = round($this->normalisasiFCR($fcrEnd, $fcrvalue), 2);
+        $normalisasiMortalitas = round($this->normalisasiMortalitas($mortalitasEnd, $mortalitasValue), 2);
+        $normalisasiHarga = round($this->normalisasiHarga($hargaEnd, $hargaValue), 2);
+        $preferensi = round($this->prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga), 2);
+
+        $kelayakan = $this->kelayakan->getKelayakan($preferensi);
+        foreach ($kelayakan->result() as $item){
+            $status = $item->id_kelayakan;
+        }
+
+
+        $data = array(
+            'id_periode' => $this->session->userdata('id_periode_kandang'),
+            'id_kelayakan' => $status,
+            'n_harga' =>$normalisasiHarga,
+            'n_ip' => $normalisasiIP,
+            'n_fcr' => $normalisasiFCR,
+            'n_mortalitas' => $normalisasiMortalitas,
+            'preferensi' => $preferensi,
+        );
+
+        $insert = $this->keputusan->insertDataKeputusan($data);
+        if ($insert > 0){
+            $this->session->set_flashdata('pesan', 'berhasil');
+            redirect(base_url() . "pemilik_kandang/Data_ayam/index");
+        } else {
+            $this->session->set_flashdata('pesan', 'failure');
+            redirect(base_url() . "pemilik_kandang/Data_ayam/index");
+        }
+
+    }
+
+    public function normalisasiIP($ipEnd, $ipValue)
+    {
+        $output = $ipEnd / $ipValue;
+        return $output;
+    }
+
+    public function normalisasiFCR($fcrEnd, $fcrValue)
+    {
+        $output = $fcrEnd / $fcrValue;
+        return $output;
+    }
+
+    public function normalisasiMortalitas($mortalitasEnd, $mortalitasVlue)
+    {
+        $output = $mortalitasVlue/$mortalitasEnd;
+        return $output;
+    }
+
+    public function normalisasiHarga($hargaEnd, $hargaValue){
+        $output = $hargaEnd/$hargaValue;
+        return $output;
+    }
+
+    public function prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga){
+        $prefrensi = ($normalisasiIP * 0.4) + ($normalisasiFCR*0.3) + ($normalisasiMortalitas*0.1)+($normalisasiHarga*0.2);
+        return $prefrensi;
     }
 }

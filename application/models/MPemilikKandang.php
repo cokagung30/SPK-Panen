@@ -22,4 +22,10 @@ class MPemilikKandang extends CI_Model{
         $this->db->where('id_ppl',$id_pll);
         return $this->db->get('kandang');
     }
+
+    public function updatePemilik($id_pemilik_kandang, $data){
+        $this->db->where('id_pemilik_kandang', $id_pemilik_kandang);
+        $this->db->update('pemilik_kandang', $data);
+        return $this->db->affected_rows();
+    }
 }

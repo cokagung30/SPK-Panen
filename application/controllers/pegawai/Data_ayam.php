@@ -14,7 +14,7 @@ class Data_Ayam extends CI_Controller
     {
         parent::__construct();
         $this->load->model('MDataAyam', 'dataAyam');
-    }
+            }
 
     public function index()
     {

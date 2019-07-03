@@ -192,6 +192,7 @@
                         <div class="modal-body">
 
                             <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" >Nama Kandang</label>
                                 <input value="<?= $id_pegawai; ?>" name="id_pegawai" hidden>
                                 <select class="form-control" name="id_kandang">
                                     <?php foreach ($kandang->result() as $data) { ?>
@@ -202,17 +203,21 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" >Nama Pegawai</label>
                                 <input type="text" class="form-control" placeholder="Nama Pegawai" value="<?= $nama_pegawai; ?>" name="namaPegawai">
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" >No Telp</label>
                                 <input type="text" class="form-control form-control-user" name="noTelp"
                                        id="exampleInputEmail" maxlength="13" placeholder="No Telp."
                                        onkeypress="return hanyaAngka(event);" value="<?= $no_telp; ?>">
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" >Username</label>
                                 <input type="text" class="form-control" placeholder="Username" name="Username" value="<?= $username; ?>">
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" >Password</label>
                                 <input type="text" class="form-control" placeholder="Password" name="Password" value="<?= $password; ?>">
                             </div>
 
