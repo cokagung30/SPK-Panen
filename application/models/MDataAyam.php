@@ -96,6 +96,8 @@ class MDataAyam extends CI_Model
     {
         $this->db->select_max('ip');
         return $this->db->get_where('data_ayam', array('id_periode' => $idPeriode));
+        $count = $this->db->query("Select COUNT(umur) as umur From data_ayam WHERE id_periode = '$idPeriode'");
+        return $count;
     }
 
     public function getPerhitungan($idPeriode)

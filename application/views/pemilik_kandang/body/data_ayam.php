@@ -36,17 +36,25 @@
 
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Data Ayam
+<<<<<<< HEAD
 
                             <a class="btn btn-info" style="color: white; margin-left: 20px;" href="">
                                 <i class="fa fa-file"></i> Export Data Ayam</a>
 
+=======
+>>>>>>> 6855739083192553471f705e940da3da87ea21c1
                             <?php
                             foreach ($jumlahData->result() as $item) {
                                 ?>
                                 <a class="btn btn-info" style="color: white; margin-left: 20px;"
+<<<<<<< HEAD
                                     <?= ($item->ip < 330) ? 'hidden' : '' ?>
                                    href="<?= base_url() ?>pemilik_kandang/Data_ayam/nilaiNormalisasi/<?= $this->session->userdata('id_periode_kandang'); ?>">
                                     <i class="fa fa-calculator"></i> Keputusan</a>
+=======
+                                   <?= ($item->umur < 10) ? 'hidden' : '' ?> href="<?= base_url() ?>pemilik_kandang/Data_ayam/nilaiNormalisasi/<?= $this->session->userdata('id_periode_kandang'); ?>">
+                                    <i class="fa fa-brain"></i>  Keputusan</a>
+>>>>>>> 6855739083192553471f705e940da3da87ea21c1
                             <?php }
                             ?>
                         </h6>
@@ -64,6 +72,7 @@
                                     <th>Mortalitas</th>
                                     <th>Harga Jual</th>
                                     <th>IP</th>
+                                    <th>Action</th
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -76,6 +85,17 @@
                                         <td><?= $item->mortalitas; ?></td>
                                         <td><?= $item->harga; ?></td>
                                         <td><?= $item->ip; ?></td>
+                                        <td>
+                                            <a id="uploadData"
+                                               class="btn btn-primary"
+                                               data-kandang="<?= $item->id_kandang; ?>"
+                                               data-pemilik="<?= $this->session->userdata('id_user'); ?>"
+                                               data-ayam="<?= $item->id_data_ayam; ?>"
+                                               style="color: white">
+                                                <i style="color: white;" class="fa fa-upload"></i> Send
+                                            </a>
+                                        </td>
+
                                     </tr>
                                 <?php } ?>
                                 </tbody>

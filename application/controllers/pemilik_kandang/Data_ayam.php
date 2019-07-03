@@ -149,6 +149,8 @@ class Data_Ayam extends CI_Controller
             redirect(base_url() . "pemilik_kandang/Data_ayam/index");
         }
 
+        $preferensi = $this->prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga);
+
     }
 
     public function normalisasiIP($ipEnd, $ipValue)
