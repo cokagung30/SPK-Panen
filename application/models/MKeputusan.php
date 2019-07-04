@@ -20,5 +20,4 @@ class MKeputusan extends CI_Model {
         $this->db->join('kelayakan','keputusan.id_kelayakan = kelayakan.id_kelayakan');
         return $this->db->get_where('keputusan', array('id_periode' => $idPeriode));
     }
-
 }

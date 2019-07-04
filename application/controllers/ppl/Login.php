@@ -38,6 +38,7 @@ class Login extends CI_Controller
             $status = "Berhasil Login";
             foreach ($loginPpl->result() as $data) {
                 $session_data = array(
+                    'kondisi' => $status,
                     'id_ppl' => $data->id_ppl,
                     'nama_ppl' => $data->nama_ppl
                 );

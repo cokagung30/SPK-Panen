@@ -123,6 +123,7 @@ class Data_Ayam extends CI_Controller
         $normalisasiMortalitas = round($this->normalisasiMortalitas($mortalitasEnd, $mortalitasValue), 2);
         $normalisasiHarga = round($this->normalisasiHarga($hargaEnd, $hargaValue), 2);
         $preferensi = round($this->prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga), 2);
+//<<<<<<< HEAD
 
         $kelayakan = $this->kelayakan->getKelayakan($preferensi);
         foreach ($kelayakan->result() as $item){
@@ -140,6 +141,25 @@ class Data_Ayam extends CI_Controller
             'preferensi' => $preferensi,
         );
 
+//=======
+
+        $kelayakan = $this->kelayakan->getKelayakan($preferensi);
+        foreach ($kelayakan->result() as $item){
+            $status = $item->id_kelayakan;
+        }
+
+
+        $data = array(
+            'id_periode' => $this->session->userdata('id_periode_kandang'),
+            'id_kelayakan' => $status,
+            'n_harga' =>$normalisasiHarga,
+            'n_ip' => $normalisasiIP,
+            'n_fcr' => $normalisasiFCR,
+            'n_mortalitas' => $normalisasiMortalitas,
+            'preferensi' => $preferensi,
+        );
+
+//>>>>>>> d60cecf5b3c183614ff0c38d943f972887b612f9
         $insert = $this->keputusan->insertDataKeputusan($data);
         if ($insert > 0){
             $this->session->set_flashdata('pesan', 'berhasil');
@@ -148,6 +168,11 @@ class Data_Ayam extends CI_Controller
             $this->session->set_flashdata('pesan', 'failure');
             redirect(base_url() . "pemilik_kandang/Data_ayam/index");
         }
+//<<<<<<< HEAD
+//=======
+
+        $preferensi = $this->prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga);
+//>>>>>>> d60cecf5b3c183614ff0c38d943f972887b612f9
 
     }
 

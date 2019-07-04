@@ -197,6 +197,7 @@ foreach ($periode->result_array() as $data):
                 <form action="<?= base_url(); ?>pemilik_kandang/Periode/editPeriode" method="post">
                     <div class="modal-body">
                         <div class="form-group">
+                            <label class="control-label col-md-5 col-sm-5 col-xs-12" >Nama Kandang</label>
                             <input class="form-control" value="<?= $id_periode ?>" name="id_kandang" hidden/>
                             <select class="form-control" name="nama_kandang" id="nama_kandang" onchange="getVolume()" disabled>
                                 <?php foreach ($kandang->result() as $data) { ?>
@@ -207,6 +208,7 @@ foreach ($periode->result_array() as $data):
                             </select>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-md-5 col-sm-5 col-xs-12" >Keterangan</label>
                             <textarea class="form-control" name="keterangan" placeholder="Keterangan....."><?php echo $keteragan; ?></textarea>
                         </div>
                     </div>

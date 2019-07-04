@@ -185,10 +185,12 @@
             <form method="post" action="<?php echo base_url(); ?>pemilik_kandang/Kandang/updateKandang">
                 <div class="modal-body">
                     <div class="form-group">
+                        <label class="control-label col-md-5 col-sm-5 col-xs-12" >Nama Kandang</label>
                         <input type="text" class="form-control" value="<?= $id_kandang; ?>" name="id_kandang" hidden>
                         <input type="text" class="form-control" value="<?= $nama_kandang; ?>" name="namaKandang">
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-5 col-sm-5 col-xs-12" >Nama PPL</label>
                         <select class="form-control" name="nama_ppl">
                             <?php foreach ($ppl->result() as $item) { ?>
                                 <option value="<?php echo $item->id_ppl; ?>" <?= ($id_ppl == $item->id_ppl)? "selected" : ""; ?>>
@@ -198,9 +200,11 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-5 col-sm-5 col-xs-12" >Lokasi Kandang</label>
                         <textarea class="form-control" name="alamatKandang"><?= $alamat; ?></textarea>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-5 col-sm-5 col-xs-12" >Volume Kandang</label>
                         <input type="text" class="form-control" value="<?= $volume; ?>" name="volumeKandang"
                                onkeypress="return hanyaAngka(event);">
                     </div>
