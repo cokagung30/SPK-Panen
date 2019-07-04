@@ -39,8 +39,9 @@
                             foreach ($jumlahData->result() as $item) {
                                 ?>
                                 <a class="btn btn-info" style="color: white; margin-left: 20px;"
-                                   <?= ($item->umur < 10) ? 'hidden' : '' ?> href="<?= base_url() ?>pemilik_kandang/Data_ayam/nilaiNormalisasi/<?= $this->session->userdata('id_periode_kandang'); ?>">
-                                    <i class="fa fa-brain"></i>  Keputusan</a>
+                                    <?= ($item->ip < 250) ? 'hidden' : '' ?>
+                                   href="<?= base_url() ?>pemilik_kandang/Data_ayam/nilaiNormalisasi/<?= $this->session->userdata('id_periode_kandang'); ?>">
+                                    <i class="fa fa-brain"></i> Keputusan</a>
                             <?php }
                             ?>
                         </h6>
@@ -58,7 +59,6 @@
                                     <th>Mortalitas</th>
                                     <th>Harga Jual</th>
                                     <th>IP</th>
-                                    <th>Action</th
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -71,6 +71,14 @@
                                         <td><?= $item->mortalitas; ?></td>
                                         <td><?= $item->harga; ?></td>
                                         <td><?= $item->ip; ?></td>
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                                <?php foreach ($keputusan->result() as $value) :?>
+                                    <tfoot <?= ($keputusan->num_rows() > 0) ? '' : 'hidden' ?>>
+                                    <tr>
+                                        <td colspan="5" class="text-center">Keputusan Panen dengan nilai Preferensi <?= $value->preferensi; ?> :</td>
+                                        <td><?= $value->status; ?></td>
                                         <td>
                                             <a id="uploadData"
                                                class="btn btn-primary"
@@ -82,8 +90,8 @@
                                             </a>
                                         </td>
                                     </tr>
-                                <?php } ?>
-                                </tbody>
+                                    </tfoot>
+                                <?php endforeach; ?>
                             </table>
                         </div>
                     </div>

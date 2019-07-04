@@ -15,4 +15,10 @@ class MKeputusan extends CI_Model {
         return $this->db->affected_rows();
     }
 
+    public function selectDataKeputusan($idPeriode){
+        $this->db->select('keputusan.*, kelayakan.*');
+        $this->db->join('kelayakan','keputusan.id_kelayakan = kelayakan.id_kelayakan');
+        return $this->db->get_where('keputusan', array('id_periode' => $idPeriode));
+    }
+
 }

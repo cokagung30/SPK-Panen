@@ -14,6 +14,8 @@ class Data_Ayam extends CI_Controller
     {
         parent::__construct();
         $this->load->model('MDataAyam', 'dataAyam');
+        $this->load->model('MKeputusan', 'keputusan');
+        $this->load->model('MKelayakan', 'kelayakan');
     }
 
     public function index()
@@ -21,6 +23,8 @@ class Data_Ayam extends CI_Controller
         $data['halaman'] = "data_ayam";
         $data['dataKandang'] = $this->dataAyam->getDataAyam($this->session->userdata('id_periode_kandang'));
         $data['jumlahData'] = $this->dataAyam->hitungJumlahHari($this->session->userdata('id_periode_kandang'));
+        $data['dataKeputusan'] = $this->keputusan->selectDataKeputusan($this->session->userdata('id_periode_kandang'));
+        $data['keputusan'] = $this->keputusan->selectDataKeputusan($this->session->userdata('id_periode_kandang'));
         $this->load->view('pemilik_kandang/body/data_ayam', $data);
     }
 
@@ -118,8 +122,32 @@ class Data_Ayam extends CI_Controller
         $normalisasiFCR = round($this->normalisasiFCR($fcrEnd, $fcrvalue), 2);
         $normalisasiMortalitas = round($this->normalisasiMortalitas($mortalitasEnd, $mortalitasValue), 2);
         $normalisasiHarga = round($this->normalisasiHarga($hargaEnd, $hargaValue), 2);
-        $preferensi = $this->prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga);
+        $preferensi = round($this->prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga), 2);
 
+        $kelayakan = $this->kelayakan->getKelayakan($preferensi);
+        foreach ($kelayakan->result() as $item){
+            $status = $item->id_kelayakan;
+        }
+
+
+        $data = array(
+            'id_periode' => $this->session->userdata('id_periode_kandang'),
+            'id_kelayakan' => $status,
+            'n_harga' =>$normalisasiHarga,
+            'n_ip' => $normalisasiIP,
+            'n_fcr' => $normalisasiFCR,
+            'n_mortalitas' => $normalisasiMortalitas,
+            'preferensi' => $preferensi,
+        );
+
+        $insert = $this->keputusan->insertDataKeputusan($data);
+        if ($insert > 0){
+            $this->session->set_flashdata('pesan', 'berhasil');
+            redirect(base_url() . "pemilik_kandang/Data_ayam/index");
+        } else {
+            $this->session->set_flashdata('pesan', 'failure');
+            redirect(base_url() . "pemilik_kandang/Data_ayam/index");
+        }
 
     }
 
