@@ -20,4 +20,9 @@ class MKeputusan extends CI_Model {
         $this->db->join('kelayakan','keputusan.id_kelayakan = kelayakan.id_kelayakan');
         return $this->db->get_where('keputusan', array('id_periode' => $idPeriode));
     }
+
+    public function deleteKeputusan($idKeputusan){
+        $this->db->delete('keputusan', array('id_keputusan' => $idKeputusan));
+        return $this->db->affected_rows();
+    }
 }

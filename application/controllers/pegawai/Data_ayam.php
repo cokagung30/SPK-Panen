@@ -35,7 +35,12 @@ class Data_Ayam extends CI_Controller
         $harga = $this->input->post('hargajual');
         $fcr = $this->jumlahFcr($id_periode, $jml_pakan, $berat_rata);
         $mortalitas_ayam = $this->mortalitas($id_periode, $jml_mati);
-        $ip = $this->hasilIp($id_periode, $jml_mati, $berat_rata, $umur, $fcr);
+        if ($umur > 0 && $umur < 7){
+            $ip = 0;
+        } else {
+            $ip = $this->hasilIp($id_periode, $jml_mati, $berat_rata, $umur, $fcr);
+        }
+
 
 
         $data = array(

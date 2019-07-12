@@ -114,24 +114,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Content Row -->
-
-                <div class="row">
-
-                    <!-- Area Chart -->
-
-                    <!-- Pie Chart -->
 
                 </div>
-
-                <!-- Content Row -->
-
 
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- End of Main Content -->
 
@@ -140,7 +127,6 @@
         <!-- End of Footer -->
 
     </div>
-    <!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->

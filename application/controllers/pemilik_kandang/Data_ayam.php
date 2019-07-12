@@ -16,6 +16,7 @@ class Data_Ayam extends CI_Controller
         $this->load->model('MDataAyam', 'dataAyam');
         $this->load->model('MKeputusan', 'keputusan');
         $this->load->model('MKelayakan', 'kelayakan');
+        $this->load->library('pdf');
     }
 
     public function index()
@@ -123,10 +124,15 @@ class Data_Ayam extends CI_Controller
         $normalisasiMortalitas = round($this->normalisasiMortalitas($mortalitasEnd, $mortalitasValue), 2);
         $normalisasiHarga = round($this->normalisasiHarga($hargaEnd, $hargaValue), 2);
         $preferensi = round($this->prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga), 2);
-//<<<<<<< HEAD
 
         $kelayakan = $this->kelayakan->getKelayakan($preferensi);
-        foreach ($kelayakan->result() as $item){
+        foreach ($kelayakan->result() as $item) {
+            $status = $item->id_kelayakan;
+        }
+
+
+        $kelayakan = $this->kelayakan->getKelayakan($preferensi);
+        foreach ($kelayakan->result() as $item) {
             $status = $item->id_kelayakan;
         }
 
@@ -134,45 +140,21 @@ class Data_Ayam extends CI_Controller
         $data = array(
             'id_periode' => $this->session->userdata('id_periode_kandang'),
             'id_kelayakan' => $status,
-            'n_harga' =>$normalisasiHarga,
+            'n_harga' => $normalisasiHarga,
             'n_ip' => $normalisasiIP,
             'n_fcr' => $normalisasiFCR,
             'n_mortalitas' => $normalisasiMortalitas,
             'preferensi' => $preferensi,
         );
 
-//=======
-
-        $kelayakan = $this->kelayakan->getKelayakan($preferensi);
-        foreach ($kelayakan->result() as $item){
-            $status = $item->id_kelayakan;
-        }
-
-
-        $data = array(
-            'id_periode' => $this->session->userdata('id_periode_kandang'),
-            'id_kelayakan' => $status,
-            'n_harga' =>$normalisasiHarga,
-            'n_ip' => $normalisasiIP,
-            'n_fcr' => $normalisasiFCR,
-            'n_mortalitas' => $normalisasiMortalitas,
-            'preferensi' => $preferensi,
-        );
-
-//>>>>>>> d60cecf5b3c183614ff0c38d943f972887b612f9
         $insert = $this->keputusan->insertDataKeputusan($data);
-        if ($insert > 0){
+        if ($insert > 0) {
             $this->session->set_flashdata('pesan', 'berhasil');
             redirect(base_url() . "pemilik_kandang/Data_ayam/index");
         } else {
             $this->session->set_flashdata('pesan', 'failure');
             redirect(base_url() . "pemilik_kandang/Data_ayam/index");
         }
-//<<<<<<< HEAD
-//=======
-
-        $preferensi = $this->prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga);
-//>>>>>>> d60cecf5b3c183614ff0c38d943f972887b612f9
 
     }
 
@@ -190,17 +172,34 @@ class Data_Ayam extends CI_Controller
 
     public function normalisasiMortalitas($mortalitasEnd, $mortalitasVlue)
     {
-        $output = $mortalitasVlue/$mortalitasEnd;
+        $output = $mortalitasVlue / $mortalitasEnd;
         return $output;
     }
 
-    public function normalisasiHarga($hargaEnd, $hargaValue){
-        $output = $hargaEnd/$hargaValue;
+    public function normalisasiHarga($hargaEnd, $hargaValue)
+    {
+        $output = $hargaEnd / $hargaValue;
         return $output;
     }
 
-    public function prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga){
-        $prefrensi = ($normalisasiIP * 0.4) + ($normalisasiFCR*0.3) + ($normalisasiMortalitas*0.1)+($normalisasiHarga*0.2);
+    public function prefrensi($normalisasiIP, $normalisasiFCR, $normalisasiMortalitas, $normalisasiHarga)
+    {
+        $prefrensi = ($normalisasiIP * 0.4) + ($normalisasiFCR * 0.3) + ($normalisasiMortalitas * 0.1) + ($normalisasiHarga * 0.2);
         return $prefrensi;
+    }
+
+    public function deleteKeputusan($idKeputusan)
+    {
+        $delete = $this->keputusan->deleteKeputusan($idKeputusan);
+        if ($delete > 0) {
+            redirect(base_url()."data_ayam/index");
+        } else {
+            redirect(base_url()."data_ayam/index");
+        }
+    }
+
+    public function pdfGenerate($periode){
+        $data['dataKandang'] = $this->dataAyam->getDataAyam($periode);
+        $this->pdf->generate('pemilik_kandang/report/data_ayam', $data, 'laporan');
     }
 }

@@ -66,7 +66,9 @@ class Login extends CI_Controller
         $this->session->unset_userdata($session_data);
         redirect(base_url() . 'pemilik_kandang/login/index');
     }
-    public function updatePemilik(){
+
+    public function updatePemilik()
+    {
         $id_pemilik_kandang = $this->input->post('id_pemilik_kandang');
 
         $data = array(
@@ -77,9 +79,18 @@ class Login extends CI_Controller
         );
 
         $update = $this->pemilik->updatePemilik($id_pemilik_kandang, $data);
+
         if ($update > 0) {
+            $value = array(
+                'id_user' => $id_pemilik_kandang,
+                'nama_user' => $this->input->post('nama_pemilik_kandang'),
+                'no_telp' => $this->input->post('no_telp'),
+                'email' => $this->input->post('email'),
+                'username' => $this->input->post('username')
+            );
             $this->session->set_flashdata('pesan', 'updated');
-            redirect(base_url() . "pemilik_kandang/Login/index");
+            $this->session->set_userdata($value);
+            redirect(base_url() . "pemilik_kandang/Dashboard/index");
         } else {
             $this->session->set_flashdata('pesan', 'failure');
             redirect(base_url() . "pemilik_kandang/Login/index");

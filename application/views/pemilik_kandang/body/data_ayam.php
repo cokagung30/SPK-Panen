@@ -29,33 +29,25 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Content Row -->
-
                 <!-- DataTales Example -->
                 <div class="card shadow mb-6">
 
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Data Ayam
 
-                            <a class="btn btn-info" style="color: white; margin-left: 20px;" href="">
+                            <a class="btn btn-info" style="color: white; margin-left: 20px;" href="<?= base_url(); ?>pemilik_kandang/Data_ayam/pdfGenerate/<?= $this->session->userdata('id_periode_kandang'); ?>">
                                 <i class="fa fa-file"></i> Export Data Ayam</a>
 
                             <?php
                             foreach ($jumlahData->result() as $item) {
                                 ?>
                                 <a class="btn btn-info" style="color: white; margin-left: 20px;"
-                                    <?= ($item->ip < 250) ? 'hidden' : '' ?>
-                                   href="<?= base_url() ?>pemilik_kandang/Data_ayam/nilaiNormalisasi/<?= $this->session->userdata('id_periode_kandang'); ?>">
-                                    <i class="fa fa-brain"></i> Keputusan</a>
                                     <?= ($item->ip < 330) ? 'hidden' : '' ?>
                                    href="<?= base_url() ?>pemilik_kandang/Data_ayam/nilaiNormalisasi/<?= $this->session->userdata('id_periode_kandang'); ?>">
                                     <i class="fa fa-calculator"></i> Keputusan</a>
-                                   <?= ($item->umur < 10) ? 'hidden' : '' ?> href="<?= base_url() ?>pemilik_kandang/Data_ayam/nilaiNormalisasi/<?= $this->session->userdata('id_periode_kandang'); ?>">
-                                    <i class="fa fa-brain"></i>  Keputusan</a>
                             <?php }
                             ?>
                         </h6>
-
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -84,10 +76,13 @@
                                     </tr>
                                 <?php } ?>
                                 </tbody>
-                                <?php foreach ($keputusan->result() as $value) :?>
+
+                                <?php foreach ($keputusan->result() as $value) : ?>
                                     <tfoot <?= ($keputusan->num_rows() > 0) ? '' : 'hidden' ?>>
                                     <tr>
-                                        <td colspan="5" class="text-center">Keputusan Panen dengan nilai Preferensi <?= $value->preferensi; ?> :</td>
+                                        <td colspan="5" class="text-center">Keputusan Panen dengan nilai
+                                            Preferensi <?= $value->preferensi; ?> :
+                                        </td>
                                         <td><?= $value->status; ?></td>
                                         <td>
                                             <a id="uploadData"
@@ -98,29 +93,17 @@
                                                style="color: white">
                                                 <i style="color: white;" class="fa fa-upload"></i> Send
                                             </a>
-                                        </td>
 
-                                    </tr>
-                                <?php endforeach; ?>
-                                </tbody>
-                                <?php foreach ($keputusan->result() as $value) :?>
-                                    <tfoot <?= ($keputusan->num_rows() > 0) ? '' : 'hidden' ?>>
-                                    <tr>
-                                        <td colspan="5" class="text-center">Keputusan Panen dengan nilai Preferensi <?= $value->preferensi; ?> :</td>
-                                        <td><?= $value->status; ?></td>
-                                        <td>
-                                            <a id="uploadData"
-                                               class="btn btn-primary"
-                                               data-kandang="<?= $item->id_kandang; ?>"
-                                               data-pemilik="<?= $this->session->userdata('id_user'); ?>"
-                                               data-ayam="<?= $item->id_data_ayam; ?>"
-                                               style="color: white">
-                                                <i style="color: white;" class="fa fa-upload"></i> Send
+                                            <a id="hapusData"
+                                               class="btn btn-warning"
+                                               style="color: white;" href="<?= base_url()?>Data_ayam/deleteKeputusan<?= $item->id_keputusan; ?>">
+                                                <i style="color: white;" class="fa fa-trash"></i> Delete
                                             </a>
                                         </td>
                                     </tr>
                                     </tfoot>
                                 <?php endforeach; ?>
+
                             </table>
                         </div>
                     </div>
@@ -189,7 +172,9 @@
         </div>
     </div>
 </div>
+
 <?php $this->load->view('pemilik_kandang/footer/footer') ?>
+
 </body>
 
 </html>
