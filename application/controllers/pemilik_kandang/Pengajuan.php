@@ -45,8 +45,8 @@ class Pengajuan extends CI_Controller
     }
 
     public function loadRealtime($id_akses){
-       $data = $this->pengajuan->tampilPengajuan($id_akses);
-       return $data;
+        $data = $this->pengajuan->tampilPengajuan($id_akses);
+        return $data;
 
     }
 }

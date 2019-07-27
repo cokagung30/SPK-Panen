@@ -13,8 +13,8 @@ class Periode extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Kandangs', 'kandang');
-        $this->load->model('PeriodeModel', 'periode');
+        $this->load->model('MKandang', 'kandang');
+        $this->load->model('MPeriode', 'periode');
     }
 
     public function index()
@@ -89,5 +89,12 @@ class Periode extends CI_Controller
             $this->session->set_flashdata('pesan', 'failure');
             redirect(base_url() . "pemilik_kandang/Periode/index");
         }
+    }
+
+    public function changePage($id_periode){
+
+        $data = array('id_periode_kandang' => $id_periode);
+        $this->session->set_userdata($data);
+        redirect(base_url()."pemilik_kandang/Data_ayam/index");
     }
 }

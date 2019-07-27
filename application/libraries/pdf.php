@@ -9,16 +9,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Dompdf\Dompdf;
 
+<<<<<<< HEAD
 class pdf extends Dompdf
 {
+=======
+class pdf extends Dompdf{
+>>>>>>> dcc3e7e18a11072b4063a27e0b9f321b3f8cf50e
 
     public function __construct()
     {
         parent::__construct();
     }
 
+<<<<<<< HEAD
     public function ci()
     {
+=======
+    public function ci(){
+>>>>>>> dcc3e7e18a11072b4063a27e0b9f321b3f8cf50e
         return get_instance();
     }
 
@@ -30,5 +38,9 @@ class pdf extends Dompdf
         $this->stream($filename.".pdf", array("Attachment" => FALSE));
     }
 
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> dcc3e7e18a11072b4063a27e0b9f321b3f8cf50e

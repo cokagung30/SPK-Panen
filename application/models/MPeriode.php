@@ -28,7 +28,6 @@ class MPeriode extends CI_Model{
         $this->db->insert('periode', $data);
         return $this->db->affected_rows();
     }
-
     public function deletePeriode($id_periode) {
         $this->db->delete('periode', array('id_periode' => $id_periode));
     }
@@ -58,23 +57,6 @@ class MPeriode extends CI_Model{
         $this->db->join('kandang', 'kandang.id_kandang = periode.id_kandang');
         $this->db->where('periode.nomor_periode', $nomor);
         return $this->db->get();
-    }
-
-    public function getCountPeriode($id_pemilik){
-        $this->db->select('periode.id_periode');
-        $this->db->from('periode');
-        $this->db->join('kandang', 'kandang.id_kandang = periode.id_kandang');
-        $this->db->where('kandang.id_pemilik_kandang', $id_pemilik);
-        return $this->db->count_all_results();
-    }
-
-    public function getCountPeriodePegawai($id_pegawai){
-        $this->db->select('periode.id_periode');
-        $this->db->from('kandang');
-        $this->db->join('periode', 'periode.id_kandang = kandang.id_kandang');
-        $this->db->join('pegawai', 'pegawai.id_kandang = kandang.id_kandang');
-        $this->db->where('pegawai.id_pegawai', $id_pegawai);
-        return $this->db->count_all_results();
     }
 
 }

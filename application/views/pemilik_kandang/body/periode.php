@@ -33,17 +33,7 @@
                 <div class="row">
 
                     <!-- Grow In Utility -->
-                    <div class="col-md-4">
-                        <form>
-                            <div class="form-group">
-                                <a style="color: #ffffff;" class="btn btn-primary btn-user btn-block"
-                                   data-toggle="modal" data-target="#tambahPeriode">
-                                    Tambah Periode
-                                </a>
-                            </div>
-                        </form>
 
-                    </div>
 
                 </div>
 
@@ -59,6 +49,17 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
+                                        <div class="col-md-4">
+                                            <form>
+                                                <div class="form-group">
+                                                    <a style="color: #ffffff;" class="btn btn-primary btn-sm"
+                                                       data-toggle="modal" data-target="#tambahPeriode">
+                                                        Tambah Periode
+                                                    </a>
+                                                </div>
+                                            </form>
+
+                                        </div>
                                         <tr>
                                             <th>No.</th>
                                             <th>Nomor Periode</th>
@@ -78,7 +79,11 @@
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $no++ ?></td>
-                                                    <td><?php echo $data['nomor_periode']; ?></td>
+                                                    <td>
+                                                        <a href="<?php echo base_url()."pemilik_kandang/Periode/changePage/".$data['id_periode']; ?>">
+                                                            <?php echo $data['nomor_periode']; ?>
+                                                        </a>
+                                                    </td>
                                                     <td><?php echo $data['nama_kandang']; ?></td>
                                                     <td><?php echo $data['volume']; ?></td>
                                                     <td><?php echo $data['keterangan']; ?></td>
@@ -192,6 +197,7 @@ foreach ($periode->result_array() as $data):
                 <form action="<?= base_url(); ?>pemilik_kandang/Periode/editPeriode" method="post">
                     <div class="modal-body">
                         <div class="form-group">
+                            <label class="control-label col-md-5 col-sm-5 col-xs-12" >Nama Kandang</label>
                             <input class="form-control" value="<?= $id_periode ?>" name="id_kandang" hidden/>
                             <select class="form-control" name="nama_kandang" id="nama_kandang" onchange="getVolume()" disabled>
                                 <?php foreach ($kandang->result() as $data) { ?>
@@ -202,6 +208,7 @@ foreach ($periode->result_array() as $data):
                             </select>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-md-5 col-sm-5 col-xs-12" >Keterangan</label>
                             <textarea class="form-control" name="keterangan" placeholder="Keterangan....."><?php echo $keteragan; ?></textarea>
                         </div>
                     </div>

@@ -28,17 +28,4 @@ class MPemilikKandang extends CI_Model{
         $this->db->update('pemilik_kandang', $data);
         return $this->db->affected_rows();
     }
-    public function tampilPemilik()
-    {
-        return $this->db->get('kelayakan');
-    }
-
-    public function tampilPemilikKandang($id_ppl){
-        return $this->db->get_where('pemilik_kandang', array('id_ppl'=>$id_ppl));
-    }
-    public function viewPemilik($id_pemilik_kandang, $data){
-        $this->db->where('id_pemilik_kandang', $id_pemilik_kandang);
-        $this->db->update('pemilik_kandang', $data);
-        return $this->db->affected_rows();
-    }
 }

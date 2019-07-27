@@ -130,7 +130,7 @@
             'Berhasil',
             'Data berhasil ditambahkan',
             'success').then((willDelete) => {
-                window.location.href = '<?= base_url(); ?>ppl/Persetujuan/index';
+            window.location.href = '<?= base_url(); ?>ppl/Persetujuan/index';
         });
     } else if (approve === "not_approved") {
         Swal.fire({

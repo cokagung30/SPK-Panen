@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2019 at 11:49 AM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 7.2.5
+-- Waktu pembuatan: 01 Jul 2019 pada 04.58
+-- Versi server: 10.1.32-MariaDB
+-- Versi PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_ayam`
+-- Struktur dari tabel `data_ayam`
 --
 
 CREATE TABLE `data_ayam` (
@@ -34,38 +34,35 @@ CREATE TABLE `data_ayam` (
   `umur` int(3) NOT NULL,
   `tanggal` date NOT NULL,
   `jml_mati` int(4) NOT NULL,
-  `total_mati` double NOT NULL,
   `berat_rata` double NOT NULL,
   `jml_pakan` double NOT NULL,
-  `total_pakan` double NOT NULL,
   `harga` int(100) NOT NULL,
   `ip` double NOT NULL,
   `fcr` double NOT NULL,
   `mortalitas` double NOT NULL,
-  `n_harga` double NOT NULL,
-  `n_ip` double NOT NULL,
-  `n_fcr` double NOT NULL,
-  `n_mortalitas` double NOT NULL,
-  `preferensi` double NOT NULL,
   `id_kelayakan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `data_ayam`
+-- Dumping data untuk tabel `data_ayam`
 --
 
-INSERT INTO `data_ayam` (`id_data_ayam`, `id_periode`, `umur`, `tanggal`, `jml_mati`, `total_mati`, `berat_rata`, `jml_pakan`, `total_pakan`, `harga`, `ip`, `fcr`, `mortalitas`, `n_harga`, `n_ip`, `n_fcr`, `n_mortalitas`, `preferensi`, `id_kelayakan`) VALUES
-(23, 14, 1, '0000-00-00', 8, 0, 50, 1.2, 0, 19000, 2080, 0.24, 0.16, 0, 0, 0, 0, 0, 1),
-(24, 15, 1, '0000-00-00', 8, 0, 50, 1.2, 0, 19000, 2080, 0.24, 0.16, 0, 0, 0, 0, 0, 1),
-(25, 16, 1, '0000-00-00', 8, 0, 50, 1.2, 0, 10000, 2080, 0.24, 0.16, 0, 0, 0, 0, 0, 1),
-(26, 16, 2, '0000-00-00', 12, 0, 62, 1.5, 0, 17000, 709.004, 0.435, 0.4, 0, 0, 0, 0, 0, 1),
-(27, 16, 3, '2010-01-12', 15, 0, 70, 1.8, 0, 20000, 360.422, 0.643, 0.7, 0, 0, 0, 0, 0, 1),
-(28, 16, 4, '2010-01-02', 13, 48, 100, 2, 6.5, 21000, 380.923, 0.65, 0.96, 0, 0, 0, 0, 0, 1);
+INSERT INTO `data_ayam` (`id_data_ayam`, `id_periode`, `umur`, `tanggal`, `jml_mati`, `berat_rata`, `jml_pakan`, `harga`, `ip`, `fcr`, `mortalitas`, `id_kelayakan`) VALUES
+(36, 16, 1, '2019-07-01', 8, 50, 1.2, 10000, 0, 0.24, 0.16, 1),
+(37, 16, 2, '2019-07-02', 4, 62, 1.5, 15000, 0, 0.435, 0.24, 1),
+(38, 16, 3, '2019-07-03', 8, 77, 1.9, 17000, 0, 0.597, 0.4, 1),
+(39, 16, 4, '2019-07-04', 5, 96, 2.2, 17000, 0, 0.708, 0.5, 1),
+(40, 16, 5, '2019-07-05', 10, 118, 2.6, 17000, 0, 0.797, 0.7, 1),
+(41, 16, 6, '2019-07-06', 8, 142, 3.1, 17000, 0, 0.88, 0.86, 1),
+(42, 16, 7, '2019-07-07', 7, 169, 3.5, 17000, 252.41, 0.947, 1, 1),
+(43, 16, 8, '2019-07-08', 4, 198, 3.9, 17000, 243.55, 1.005, 1.08, 1),
+(44, 16, 9, '2019-07-09', 4, 230, 4.4, 17000, 239.03, 1.057, 1.16, 1),
+(45, 16, 10, '2019-07-10', 4, 266, 4.9, 17000, 239.26, 1.098, 1.24, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kandang`
+-- Struktur dari tabel `kandang`
 --
 
 CREATE TABLE `kandang` (
@@ -78,19 +75,17 @@ CREATE TABLE `kandang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kandang`
+-- Dumping data untuk tabel `kandang`
 --
 
 INSERT INTO `kandang` (`id_kandang`, `id_pemilik_kandang`, `id_ppl`, `nama_kandang`, `lokasi`, `volume`) VALUES
 (18, 11, 1, 'Kandang di Nunggar Sari', 'Jl. Diponegoro', 5000),
-(19, 11, 2, 'Kandang Putri', 'jl bukit sari', 5000),
-(20, 11, 1, 'Kandang di Nunggar Sari', 'Singaraja', 5000),
 (21, 2, 1, 'Cubik1', 'Jl. Tubik pret', 5000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kelayakan`
+-- Struktur dari tabel `kelayakan`
 --
 
 CREATE TABLE `kelayakan` (
@@ -101,16 +96,42 @@ CREATE TABLE `kelayakan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kelayakan`
+-- Dumping data untuk tabel `kelayakan`
 --
 
 INSERT INTO `kelayakan` (`id_kelayakan`, `batas_atas`, `batas_bawah`, `status`) VALUES
-(1, 200, 200, 'layak_penen');
+(1, 0, 0.74, 'belum_layak'),
+(2, 0.75, 0.76, 'layak_penen'),
+(3, 0.77, 1, 'segera_panen');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pegawai`
+-- Struktur dari tabel `keputusan`
+--
+
+CREATE TABLE `keputusan` (
+  `id_keputusan` int(11) NOT NULL,
+  `id_periode` int(11) NOT NULL,
+  `n_harga` double NOT NULL,
+  `n_ip` double NOT NULL,
+  `n_fcr` double NOT NULL,
+  `n_mortalitas` double NOT NULL,
+  `preferensi` double NOT NULL,
+  `id_kelayakan` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `keputusan`
+--
+
+INSERT INTO `keputusan` (`id_keputusan`, `id_periode`, `n_harga`, `n_ip`, `n_fcr`, `n_mortalitas`, `preferensi`, `id_kelayakan`) VALUES
+(1, 16, 1, 1, 0.22, 1, 0.77, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pegawai`
 --
 
 CREATE TABLE `pegawai` (
@@ -123,7 +144,7 @@ CREATE TABLE `pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pegawai`
+-- Dumping data untuk tabel `pegawai`
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `id_kandang`, `nama_pegawai`, `no_telp`, `username`, `password`) VALUES
@@ -133,7 +154,7 @@ INSERT INTO `pegawai` (`id_pegawai`, `id_kandang`, `nama_pegawai`, `no_telp`, `u
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pemilik_kandang`
+-- Struktur dari tabel `pemilik_kandang`
 --
 
 CREATE TABLE `pemilik_kandang` (
@@ -147,7 +168,7 @@ CREATE TABLE `pemilik_kandang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pemilik_kandang`
+-- Dumping data untuk tabel `pemilik_kandang`
 --
 
 INSERT INTO `pemilik_kandang` (`id_pemilik_kandang`, `nama_pemilik_kandang`, `no_telp`, `email`, `alamat`, `username`, `password`) VALUES
@@ -165,7 +186,7 @@ INSERT INTO `pemilik_kandang` (`id_pemilik_kandang`, `nama_pemilik_kandang`, `no
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengajuan`
+-- Struktur dari tabel `pengajuan`
 --
 
 CREATE TABLE `pengajuan` (
@@ -175,20 +196,10 @@ CREATE TABLE `pengajuan` (
   `verifikasi` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pengajuan`
---
-
-INSERT INTO `pengajuan` (`id_pengajuan`, `id_pemilik_kandang`, `id_data_ayam`, `verifikasi`) VALUES
-(4, 11, 24, 'Belum Terverifikasi'),
-(5, 2, 25, 'Belum Terverifikasi'),
-(6, 2, 26, 'Belum Terverifikasi'),
-(7, 2, 27, 'Belum Terverifikasi');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `periode`
+-- Struktur dari tabel `periode`
 --
 
 CREATE TABLE `periode` (
@@ -200,19 +211,18 @@ CREATE TABLE `periode` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `periode`
+-- Dumping data untuk tabel `periode`
 --
 
 INSERT INTO `periode` (`id_periode`, `id_kandang`, `nomor_periode`, `keterangan`, `status`) VALUES
 (14, 18, 1, 'Jan 2019', 'panen'),
 (15, 18, 2, 'feb 2019', 'panen'),
-(16, 21, 1, '16 Juni 2019', 'panen'),
-(17, 21, 2, '17 Juni 2019', 'panen');
+(16, 21, 1, '16 Juni 2019', 'panen');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ppl`
+-- Struktur dari tabel `ppl`
 --
 
 CREATE TABLE `ppl` (
@@ -223,7 +233,7 @@ CREATE TABLE `ppl` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ppl`
+-- Dumping data untuk tabel `ppl`
 --
 
 INSERT INTO `ppl` (`id_ppl`, `nama_ppl`, `username`, `password`) VALUES
@@ -235,7 +245,7 @@ INSERT INTO `ppl` (`id_ppl`, `nama_ppl`, `username`, `password`) VALUES
 --
 
 --
--- Indexes for table `data_ayam`
+-- Indeks untuk tabel `data_ayam`
 --
 ALTER TABLE `data_ayam`
   ADD PRIMARY KEY (`id_data_ayam`),
@@ -243,7 +253,7 @@ ALTER TABLE `data_ayam`
   ADD KEY `id_kelayakan` (`id_kelayakan`);
 
 --
--- Indexes for table `kandang`
+-- Indeks untuk tabel `kandang`
 --
 ALTER TABLE `kandang`
   ADD PRIMARY KEY (`id_kandang`),
@@ -251,26 +261,33 @@ ALTER TABLE `kandang`
   ADD KEY `id_ppl` (`id_ppl`);
 
 --
--- Indexes for table `kelayakan`
+-- Indeks untuk tabel `kelayakan`
 --
 ALTER TABLE `kelayakan`
   ADD PRIMARY KEY (`id_kelayakan`);
 
 --
--- Indexes for table `pegawai`
+-- Indeks untuk tabel `keputusan`
+--
+ALTER TABLE `keputusan`
+  ADD PRIMARY KEY (`id_keputusan`),
+  ADD KEY `id_periode` (`id_periode`);
+
+--
+-- Indeks untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id_pegawai`),
   ADD KEY `id_kandang` (`id_kandang`);
 
 --
--- Indexes for table `pemilik_kandang`
+-- Indeks untuk tabel `pemilik_kandang`
 --
 ALTER TABLE `pemilik_kandang`
   ADD PRIMARY KEY (`id_pemilik_kandang`);
 
 --
--- Indexes for table `pengajuan`
+-- Indeks untuk tabel `pengajuan`
 --
 ALTER TABLE `pengajuan`
   ADD PRIMARY KEY (`id_pengajuan`),
@@ -278,102 +295,108 @@ ALTER TABLE `pengajuan`
   ADD KEY `id_data_ayam` (`id_data_ayam`);
 
 --
--- Indexes for table `periode`
+-- Indeks untuk tabel `periode`
 --
 ALTER TABLE `periode`
   ADD PRIMARY KEY (`id_periode`),
   ADD KEY `id_kandang` (`id_kandang`);
 
 --
--- Indexes for table `ppl`
+-- Indeks untuk tabel `ppl`
 --
 ALTER TABLE `ppl`
   ADD PRIMARY KEY (`id_ppl`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `data_ayam`
+-- AUTO_INCREMENT untuk tabel `data_ayam`
 --
 ALTER TABLE `data_ayam`
-  MODIFY `id_data_ayam` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_data_ayam` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `kandang`
+-- AUTO_INCREMENT untuk tabel `kandang`
 --
 ALTER TABLE `kandang`
-  MODIFY `id_kandang` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_kandang` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `kelayakan`
+-- AUTO_INCREMENT untuk tabel `kelayakan`
 --
 ALTER TABLE `kelayakan`
-  MODIFY `id_kelayakan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_kelayakan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `pegawai`
+-- AUTO_INCREMENT untuk tabel `keputusan`
+--
+ALTER TABLE `keputusan`
+  MODIFY `id_keputusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   MODIFY `id_pegawai` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `pemilik_kandang`
+-- AUTO_INCREMENT untuk tabel `pemilik_kandang`
 --
 ALTER TABLE `pemilik_kandang`
   MODIFY `id_pemilik_kandang` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `pengajuan`
+-- AUTO_INCREMENT untuk tabel `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `periode`
+-- AUTO_INCREMENT untuk tabel `periode`
 --
 ALTER TABLE `periode`
-  MODIFY `id_periode` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_periode` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `ppl`
+-- AUTO_INCREMENT untuk tabel `ppl`
 --
 ALTER TABLE `ppl`
   MODIFY `id_ppl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `data_ayam`
+-- Ketidakleluasaan untuk tabel `data_ayam`
 --
 ALTER TABLE `data_ayam`
   ADD CONSTRAINT `data_ayam_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `periode` (`id_periode`),
   ADD CONSTRAINT `data_ayam_ibfk_2` FOREIGN KEY (`id_kelayakan`) REFERENCES `kelayakan` (`id_kelayakan`);
 
 --
--- Constraints for table `kandang`
+-- Ketidakleluasaan untuk tabel `kandang`
 --
 ALTER TABLE `kandang`
   ADD CONSTRAINT `kandang_ibfk_1` FOREIGN KEY (`id_pemilik_kandang`) REFERENCES `pemilik_kandang` (`id_pemilik_kandang`);
 
 --
--- Constraints for table `pegawai`
+-- Ketidakleluasaan untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD CONSTRAINT `pegawai_ibfk_1` FOREIGN KEY (`id_kandang`) REFERENCES `kandang` (`id_kandang`);
 
 --
--- Constraints for table `pengajuan`
+-- Ketidakleluasaan untuk tabel `pengajuan`
 --
 ALTER TABLE `pengajuan`
   ADD CONSTRAINT `pengajuan_ibfk_1` FOREIGN KEY (`id_pemilik_kandang`) REFERENCES `pemilik_kandang` (`id_pemilik_kandang`),
   ADD CONSTRAINT `pengajuan_ibfk_2` FOREIGN KEY (`id_data_ayam`) REFERENCES `data_ayam` (`id_data_ayam`);
 
 --
--- Constraints for table `periode`
+-- Ketidakleluasaan untuk tabel `periode`
 --
 ALTER TABLE `periode`
   ADD CONSTRAINT `periode_ibfk_1` FOREIGN KEY (`id_kandang`) REFERENCES `kandang` (`id_kandang`);

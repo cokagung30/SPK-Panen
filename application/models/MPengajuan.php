@@ -63,7 +63,7 @@ class MPengajuan extends CI_Model{
         $this->db->where('pengajuan.status_pengajuan', '2');
         $this->db->or_where('pengajuan.status_pengajuan', '1');
         return $this->db->get();
-}
+    }
     public function tampilPengajuan3($id_pemilik_kandang){
         $this->db->select('periode.*, data_ayam.*, pengajuan.*, kelayakan.*, pemilik_kandang.*');
         $this->db->from('data_ayam');

@@ -6,11 +6,11 @@
 
 <title>
     <?php
-        if ($halaman == "login"){
-            echo "Login";
-        } else{
-            echo "SPK Panen";
-        }
+    if ($halaman == "login"){
+        echo "Login";
+    } else{
+        echo "SPK Panen";
+    }
     ?>
 </title>
 

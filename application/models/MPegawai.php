@@ -30,11 +30,6 @@ class MPegawai extends CI_Model
         $this->db->update('pegawai', $data);
         return $this->db->affected_rows();
     }
-    public function updatePegawai2($id_pegawai, $data){
-        $this->db->where('id_pegawai', $id_pegawai);
-        $this->db->update('pegawai', $data);
-        return $this->db->affected_rows();
-    }
 
     public function loginPegawai($username, $password){
         return $this->db->get_where('pegawai', array('username' => $username, 'password'=> $password));

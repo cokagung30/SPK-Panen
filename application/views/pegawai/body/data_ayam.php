@@ -30,57 +30,91 @@
             <div class="container-fluid">
 
                 <!-- Content Row -->
+                <!-- DataTales Example -->
+                <div class="card shadow mb-6">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Data Ayam</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <form>
+                                            <div class="form-group">
+                                                <a style="color: #ffffff;" class="btn btn-primary btn-sm"
+                                                   data-toggle="modal" data-target="#tambahAyam">
+                                                    Tambah Data Ayam
+                                                </a>
+                                            </div>
+                                        </form>
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <form>
-                            <div class="form-group">
-                                <a style="color: #ffffff;" class="btn btn-primary btn-user btn-block"
-                                   data-toggle="modal" data-target="#tambahAyam">
-                                    Tambah Data Harian Ayam
-                                </a>
-                            </div>
-                        </form>
-
+                                    </div>
+                                </div>
+                                <tr>
+                                    <th>Periode</th>
+                                    <th>Tanggal</th>
+                                    <th>Umur</th>
+                                    <th>Berat Rata</th>
+                                    <th>Jumlah Ayam Mati</th>
+                                    <th>Jumlah Pakan</th>
+                                    <th>Harga Jual</th>
+                                    <th colspan="2">
+                                        <center>Action</center>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($dataKandang->result() as $item) { ?>
+                                    <tr>
+                                        <td><?= $item->nomor_periode; ?></td>
+                                        <td><?= $item->tanggal; ?></td>
+                                        <td><?= $item->umur; ?></td>
+                                        <td><?= $item->berat_rata; ?></td>
+                                        <td><?= $item->jml_mati; ?></td>
+                                        <td><?= $item->jml_pakan; ?></td>
+                                        <td><?= $item->harga; ?></td>
+                                        <td>
+                                            <center>
+                                                <a class="btn btn-warning" data-toggle="modal"
+                                                   data-target="#editDataAyam<?= $item->id_data_ayam; ?>"
+                                                   style="color: white"><i style="color: white;" class="fa fa-edit"></i>
+                                                    Edit</a>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <a class="btn btn-danger hapusDataAyam" data-toggle="modal"
+                                                   style="color: white"><i style="color: white;" class="fa fa-trash">
+                                                    </i> Delete</a>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-center">
+                                        Total
+                                    </td>
+                                    <?php foreach ($jumlah->result() as $item): ?>
+                                        <td><?= $item->jml_mati; ?></td>
+                                        <td><?= $item->jml_pakan; ?></td>
+                                        <td><?= $item->harga; ?></td>
+                                    <?php endforeach; ?>
+                                    <td colspan="2" class="text-center">
+                                        <a href="<?= base_url(); ?>pegawai/Data_ayam/deleteAll/<?= $this->session->userdata('id_periode'); ?>"
+                                           class="btn btn-danger" data-toggle="modal"
+                                           style="color: white"><i style="color: white;" class="fa fa-trash">
+                                            </i> Clear All</a>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-6">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Ayam</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>Periode</th>
-                                        <th>Tanggal</th>
-                                        <th>Umur</th>
-                                        <th>Berat Rata</th>
-                                        <th>Jumlah Ayam Mati</th>
-                                        <th>Jumlah Pakan </th>
-                                        <th>Harga Jual</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php foreach ($dataKandang->result() as $item){?>
-                                        <tr>
-                                            <td><?= $item->nomor_periode; ?></td>
-                                            <td></td>
-                                            <td><?= $item->umur; ?></td>
-                                            <td><?= $item->berat_rata; ?></td>
-                                            <td><?= $item->jml_mati; ?></td>
-                                            <td><?= $item->jml_pakan; ?></td>
-                                            <td><?= $item->harga; ?></td>
-                                        </tr>
-                                    <?php }?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
 
             </div>
             <!-- /.container-fluid -->
@@ -116,7 +150,8 @@
             <form method="post" action="<?php echo base_url(); ?>pegawai/Data_ayam/insertDataAyam">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nama Periode" name="namaPeriode" value="<?= $this->session->userdata('keterangan'); ?>" disabled>
+                        <input type="text" class="form-control" placeholder="Nama Periode" name="namaPeriode"
+                               value="<?= $this->session->userdata('keterangan'); ?>" disabled>
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" placeholder="Tanggal" name="tanggal">
@@ -145,8 +180,74 @@
     </div>
 </div>
 
-
-
+<?php foreach ($dataKandang->result() as $data) :
+    $id_data_ayam = $data->id_data_ayam;
+    $umur = $data->umur;
+    $jml_mati = $data->jml_mati;
+    $berat_rata = $data->berat_rata;
+    $jml_pakan = $data->jml_pakan;
+    $tanggal = $data->tanggal;
+    $harga = $data->harga;
+    $mortalitas = $data->mortalitas;
+    $ip = $data->ip;
+    $fcr = $data->fcr;
+    ?>
+    <div class="modal fade" id="editDataAyam<?= $id_data_ayam ?>" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Data Harian Ayam</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form method="post" action="<?php echo base_url(); ?>pegawai/DataAyam/updateDataAyam/<?= $id_data_ayam; ?>">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" value="<?= $jml_mati; ?>" name="jm_mati_sebelumnya" hidden>
+                            <input type="text" value="<?= $berat_rata; ?>" name="berat_rata_sebelumnya" hidden>
+                            <input type="text" value="<?= $jml_pakan; ?>" name="jml_pakan_sebelumnya" hidden>
+                            <input type="text" value="<?= $mortalitas; ?>" name="mortalitas" hidden>
+                            <input type="text" value="<?= $fcr; ?>" name="fcr" hidden>
+                            <input type="text" value="<?= $ip; ?>" name="ip" hidden>
+                            <input type="text" class="form-control" placeholder="Nama Periode" name="namaPeriode"
+                                   value="<?= $this->session->userdata('keterangan'); ?>" disabled>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" class="form-control" placeholder="Tanggal" name="tanggal"
+                                   value="<?= $tanggal; ?>" hidden>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Umur" name="umur"
+                                   value="<?= $umur; ?>" hidden>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Berat rata-rata" name="beratrata"
+                                   value="<?= $berat_rata; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Jumlah Ayam Mati" name="jumlahmati"
+                                   value="<?= $jml_mati; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Jumlah Pakan Habis" name="jumlahpakan"
+                                   value="<?= $jml_pakan ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Harga Jual" name="hargajual"
+                                   value="<?= $harga; ?>">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
 <?php $this->load->view('pegawai/footer/footer') ?>
 </body>
 

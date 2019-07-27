@@ -67,7 +67,7 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++ ?></td>
-<!--                                                <td>--><?php //echo $data->id_data_ayam; ?><!--</td>-->
+                                                <!--                                                <td>--><?php //echo $data->id_data_ayam; ?><!--</td>-->
                                                 <td><?php echo $data->keterangan; ?></td>
                                                 <td><?php echo $data->umur; ?></td>
                                                 <td><?php echo $data->fcr; ?></td>
@@ -77,7 +77,7 @@
                                                 <td>
                                                     <center>
                                                         <a id="deletePengajuan" data-id="<?php echo $data->id_kandang; ?>" class="btn btn-danger" style="color: white"><i style="color: white;"
-                                                                                     class="fa fa-trash-alt"></i> Delete</a>
+                                                                                                                                                                          class="fa fa-trash-alt"></i> Delete</a>
                                                     </center>
                                                 </td>
 

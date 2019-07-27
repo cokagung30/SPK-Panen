@@ -15,12 +15,18 @@
 <table style="width:100%">
     <thead>
     <tr>
+<<<<<<< HEAD
         <th>No</th>
         <th>Periode</th>
         <th>Umur</th>
         <th>Jml. Mati</th>
         <th>Jml.Pakan</th>
         <th>Berat Rata</th>
+=======
+        <th>Periode</th>
+        <th>Umur</th>
+        <th>Tanggal</th>
+>>>>>>> dcc3e7e18a11072b4063a27e0b9f321b3f8cf50e
         <th>FCR</th>
         <th>Mortalitas</th>
         <th>Harga Jual</th>
@@ -28,6 +34,7 @@
     </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
     <?php
     $no = 1;
     $total_mati = 0;
@@ -64,6 +71,20 @@
     </tfoot>
 
     <label>Tanda Tangan Pemilik Kandang</label>
+=======
+    <?php foreach ($dataKandang->result() as $item) :?>
+        <tr>
+            <td><?= $item->keterangan; ?></td>
+            <td><?= $item->umur; ?></td>
+            <td><?= $item->tanggal; ?></td>
+            <td><?= round($item->fcr, 2); ?></td>
+            <td><?= $item->mortalitas; ?></td>
+            <td><?= $item->harga; ?></td>
+            <td><?= $item->ip; ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+>>>>>>> dcc3e7e18a11072b4063a27e0b9f321b3f8cf50e
 </table>
 
 </body>

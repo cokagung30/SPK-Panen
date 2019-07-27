@@ -91,7 +91,7 @@
                                                data-kandang="<?= $item->id_kandang; ?>"
                                                data-pemilik="<?= $this->session->userdata('id_user'); ?>"
                                                data-keputusan="<?= $value->id_kelayakan; ?>"
-                                                data-ayam="<?= $item->id_data_ayam; ?>"
+                                               data-ayam="<?= $item->id_data_ayam; ?>"
                                                style="color: white">
                                                 <i style="color: white;" class="fa fa-upload"></i> Send
                                             </a>

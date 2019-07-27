@@ -13,7 +13,7 @@ class Daftar extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('PemilikKandang', 'pemilik');
+        $this->load->model('MPemilikKandang', 'pemilik');
     }
 
     public function index()

@@ -78,7 +78,7 @@
                                                 <td><?php echo $data->status; ?></td>
                                                 <td>
                                                     <a class="btn btn-warning" data-toggle="modal" data-target="#viewpengajuan<?= $data->id_pengajuan; ?>" style="color: white"><i style="color: white;"
-                                                                                                                                                                               class="fa fa-edit"></i> Preview</a>
+                                                                                                                                                                                   class="fa fa-edit"></i> Preview</a>
                                                 </td>
 
                                             </tr>
@@ -120,15 +120,15 @@
 
 <?php
 foreach ($sql1->result() as $data):
-$id_pengajuan = $data->id_pengajuan;
-$umur = $data->umur;
-$keterangan = $data->keterangan;
-$fcr = $data->fcr;
-$mortalitas = $data->mortalitas;
-$ip = $data->ip;
-$status_kelayakan = $data->status;
+    $id_pengajuan = $data->id_pengajuan;
+    $umur = $data->umur;
+    $keterangan = $data->keterangan;
+    $fcr = $data->fcr;
+    $mortalitas = $data->mortalitas;
+    $ip = $data->ip;
+    $status_kelayakan = $data->status;
 
-?>
+    ?>
     <div class="modal fade" id="viewpengajuan<?= $id_pengajuan; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">

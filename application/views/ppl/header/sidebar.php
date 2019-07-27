@@ -7,11 +7,11 @@
         </div>
         <div class="sidebar-brand-text mx-3">
             <?php
-                if ($this->session->userdata('level') == 2){
-                    echo "ppl";
-                } else{
-                    echo "PPL";
-                }
+            if ($this->session->userdata('level') == 2){
+                echo "ppl";
+            } else{
+                echo "PPL";
+            }
             ?>
         </div>
     </a>
